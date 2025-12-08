@@ -1,0 +1,126 @@
+// myboard.keymap
+// ざっくり 5 行 × 12 列 = 60 キー分のスケルトン
+// XXX は未使用キー（&none）のエイリアス
+
+#define XXX &none
+
+/ {
+    // ---------- マクロ定義 ----------
+    macros {
+        // ; + Enter を送るマクロ
+        semicolon_enter: semicolon_enter {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <
+                &kp SEMI    // ;
+                &kp ENTER   // Enter
+            >;
+        };
+    };
+
+    // ---------- 振る舞い定義 ----------
+    behaviors {
+        // タップ：; / 長押し：; + Enter
+        semicolon_ht: semicolon_ht {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SEMICOLON_HT";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";   // 好みで balanced 等に変更可
+            tapping-term-ms = <200>;    // 200ms 以上で長押し判定
+
+            // bindings = <hold側のbehavior>, <tap側のbehavior>
+            bindings = <&semicolon_enter>, <&kp>;
+        };
+    };
+
+    // ---------- レイヤ定義 ----------
+    keymap {
+        compatible = "zmk,keymap";
+
+        // ==============================
+        // LAYER 0: ベースレイヤ
+        // KLE の 0〜4 行 に相当
+        // ==============================
+        default_layer {
+            bindings = <
+                // row 0: escp, P, E, U, G | C, R, L, _, prsc
+                &kp ESC    &kp P      &kp E      &kp U      &kp G      XXX
+                &kp C      &kp R      &kp L      &kp MINUS  &kp PSCRN  XXX
+
+                // row 1: tab, Y, I, A, O | D, H, T, N, S, Enter(;Ent)
+                &kp TAB    &kp Y      &kp I      &kp A      &kp O      XXX
+                &kp D      &kp H      &kp T      &kp N      &kp S      &kp ENTER
+
+                // row 2: Shift, Q, J, K, X, F | B, M, W, V, Z, Shift
+                &kp LSHFT  &kp Q      &kp J      &kp K      &kp X      &kp F
+                &kp B      &kp M      &kp W      &kp V      &kp Z      &kp RSHFT
+
+                // row 3: Ctrl, Alt, Win | del （他は空き）
+                &kp LCTRL  &kp LALT   &kp LGUI   XXX        XXX        XXX
+                XXX        XXX        XXX        XXX        XXX        &kp DEL
+
+                // row 4: layer3, layer2, bkspc IMFoff | Space IMFon, layer1
+                // layer3 → Fn レイヤ (2), layer2 → 記号レイヤ (1), layer1 → ベースへ戻る
+                &mo 2      &mo 1      &kp BSPC   XXX        XXX        XXX
+                XXX        &kp SPACE  &to 0      XXX        XXX        XXX
+            >;
+        };
+
+        // ==============================
+        // LAYER 1: 記号／数字レイヤ
+        // KLE の 5〜9 行 相当
+        // ==============================
+        symbol_layer {
+            bindings = <
+                // row 0: "! 1", " 2", "# 3", ... ") 9", " 0"
+                &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &kp N6
+                &kp N7     &kp N8     &kp N9     &kp N0     XXX        XXX
+
+                // row 1: tab, (空), "+ ;", "< ,", "> .", "= -", "{ [", "} ]", "~ ^", "` @", Enter
+                &kp TAB    XXX        &semicolon_ht 0 SEMI   &kp COMMA  &kp DOT    &kp MINUS
+                &kp LBKT   &kp RBKT   /* ~ ^ */ XXX         /* ` @ */ XXX        &kp ENTER
+
+                // row 2: Shift, (空), (空), "|", "* :", "_", "> .", "? /", (空×3), Shift
+                &kp LSHFT  XXX        XXX        /* | */ XXX  /* * : */ XXX  /* _ */ &kp MINUS
+                &kp DOT    &kp SLASH  XXX        XXX        XXX        &kp RSHFT
+
+                // row 3: Ctrl, (空), Win, del
+                &kp LCTRL  XXX        &kp LGUI   XXX        XXX        XXX
+                XXX        XXX        XXX        XXX        XXX        &kp DEL
+
+                // row 4: レイヤキーはベースと同じ構成
+                &mo 2      &mo 1      &kp BSPC   XXX        XXX        XXX
+                XXX        &kp SPACE  &to 0      XXX        XXX        XXX
+            >;
+        };
+
+        // ==============================
+        // LAYER 2: Fn / ショートカットレイヤ
+        // KLE の 10〜14 行 相当
+        // ==============================
+        fn_layer {
+            bindings = <
+                // row 0: F1〜F10
+                &kp F1     &kp F2     &kp F3     &kp F4     &kp F5     &kp F6
+                &kp F7     &kp F8     &kp F9     &kp F10    XXX        XXX
+
+                // row 1: tab, ctrlZ, ctrlX, ctrlC, ctrlV, F11, F12, F13?, F14?, ctrlF, Enter
+                // ctrl 系はとりあえず「その位置に置く」だけ。後でマクロに差し替え可
+                &kp TAB    XXX        XXX        XXX        XXX        &kp F11
+                &kp F12    XXX        XXX        XXX        &kp ENTER
+
+                // row 2: Shift, (空×2), ctrlA, ctrlS, (空×5), Shift
+                &kp LSHFT  XXX        XXX        XXX        XXX        XXX
+                XXX        XXX        XXX        XXX        XXX        &kp RSHFT
+
+                // row 3: Ctrl, (空), Win, del
+                &kp LCTRL  XXX        &kp LGUI   XXX        XXX        XXX
+                XXX        XXX        XXX        XXX        XXX        &kp DEL
+
+                // row 4: レイヤキー
+                &mo 2      &mo 1      &kp BSPC   XXX        XXX        XXX
+                XXX        &kp SPACE  &to 0      XXX        XXX        XXX
+            >;
+        };
+    };
+};
