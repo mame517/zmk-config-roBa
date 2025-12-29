@@ -32,7 +32,7 @@
             #binding-cells = <0>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            bindings = <&kp BSPC>, <&kp INT_MUHENKAN>;
+            bindings = <&kp BSPC &kp INT_MUHENKAN>;
         };
 
         space_imeon_ht: space_imeon_ht {
@@ -41,7 +41,7 @@
             #binding-cells = <0>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            bindings = <&kp SPACE>, <&kp INT_HENKAN>;
+            bindings = <&kp SPACE &kp INT_HENKAN>;
         };
 
         enter_semienter_ht: enter_semienter_ht {
@@ -53,7 +53,7 @@
             tapping-term-ms = <200>;
 
             // hold: ; + Enter（既存マクロ） / tap: Enter
-            bindings = <&semicolon_enter>, <&kp ENTER>;
+            bindings = <&semicolon_enter &kp ENTER>;
         };
 
 
