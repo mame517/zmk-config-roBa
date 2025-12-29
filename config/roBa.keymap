@@ -6,7 +6,7 @@
  * ここも 4行ぶん（10 / 12 / 12 / 9 = 合計43）で bindings を書きます。
  */
 
-#define &trans &none
+#define XXX &none
 
 / {
   macros {
