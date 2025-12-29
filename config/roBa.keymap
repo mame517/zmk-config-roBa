@@ -2,11 +2,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-/*
- * roBa (see roBa.dtsi) uses a 4-row matrix-transform.
- * Each layer must provide 43 bindings total: 10 / 12 / 12 / 9.
- */
-
 #define XXX &trans
 
 / {
@@ -26,7 +21,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp BACKSPACE &kp INT_MUHENKAN>;
+      bindings = <&kp &kp>;
     };
 
     space_imeon_ht: space_imeon_ht {
@@ -34,7 +29,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp SPACE &kp INT_HENKAN>;
+      bindings = <&kp &kp>;
     };
 
     enter_semi_ht: enter_semi_ht {
@@ -42,40 +37,36 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp ENTER &semi_enter>;
+      bindings = <&kp &semi_enter>;
     };
   };
 
   keymap {
     compatible = "zmk,keymap";
 
-    /* =========================
-     * LAYER 0: base
-     * 10 / 12 / 12 / 9 = 43 keys
-     * ========================= */
     default_layer {
       bindings = <
-        /* row 0 (10) : 5L | 5R */
+        /* row 0 (10) */
         &kp ESCAPE   &kp P       &kp E       &kp U       &kp G
         &kp C        &kp R       &kp L       &kp MINUS   &kp DEL
 
-        /* row 1 (12) : 6L | (thumb1) | 5R */
+        /* row 1 (12) */
         &kp TAB      &kp Y       &kp I       &kp A       &kp O       &trans
-        &kp D        &kp T       &kp N       &kp S       &kp H       &enter_semi_ht
+        &kp D        &kp T       &kp N       &kp S       &kp H
+        &enter_semi_ht  &kp ENTER   &semi_enter
 
-        /* row 2 (12) : 6L | (thumb2) | 5R */
+        /* row 2 (12) */
         &kp LEFT_SHIFT   &kp Q       &kp J       &kp K       &kp X       &kp F
         &kp B            &kp M       &kp W       &kp V       &kp Z       &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &bspc_imeoff_ht
-        &space_imeon_ht     &mo 1 &kp PSCRN
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1
+        &bspc_imeoff_ht     &kp BACKSPACE   &kp INT_MUHENKAN
+        &space_imeon_ht     &kp SPACE       &kp INT_HENKAN
+        &mo 1 &kp PSCRN
       >;
     };
 
-    /* =========================
-     * LAYER 1: symbol
-     * ========================= */
     symbol_layer {
       bindings = <
         /* row 0 (10) */
@@ -84,21 +75,21 @@
 
         /* row 1 (12) */
         &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
-        &kp MINUS &kp LBKT       &kp RBKT       &kp LS(N6)  &kp LS(N2)    &enter_semi_ht
+        &kp MINUS &kp LBKT       &kp RBKT       &kp LS(N6)  &kp LS(N2)
+        &enter_semi_ht  &kp ENTER   &semi_enter
 
         /* row 2 (12) */
         &kp LEFT_SHIFT  &trans     &trans         &trans     &kp LS(SEMICOLON)  &kp BACKSLASH
         &kp DOT         &kp SLASH  &trans         &trans     &trans             &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &bspc_imeoff_ht
-        &space_imeon_ht     &mo 1 &kp PSCRN
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1
+        &bspc_imeoff_ht     &kp BACKSPACE   &kp INT_MUHENKAN
+        &space_imeon_ht     &kp SPACE       &kp INT_HENKAN
+        &mo 1 &kp PSCRN
       >;
     };
 
-    /* =========================
-     * LAYER 2: fn
-     * ========================= */
     fn_layer {
       bindings = <
         /* row 0 (10) */
@@ -107,38 +98,41 @@
 
         /* row 1 (12) */
         &kp TAB   &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &trans
-        &kp F11   &kp F12     &kp F13     &kp LC(F)   &kp LC(H)   &enter_semi_ht
+        &kp F11   &kp F12     &kp F13     &kp LC(F)   &kp LC(H)
+        &enter_semi_ht  &kp ENTER   &semi_enter
 
         /* row 2 (12) */
         &kp LEFT_SHIFT  &kp LC(A) &kp LC(S) &kp LC(D)  &kp LC(W)    &trans
         &kp HOME        &kp END   &kp LEFT  &kp RIGHT  &trans       &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &bspc_imeoff_ht
-        &space_imeon_ht     &mo 1 &kp PSCRN
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1
+        &bspc_imeoff_ht     &kp BACKSPACE   &kp INT_MUHENKAN
+        &space_imeon_ht     &kp SPACE       &kp INT_HENKAN
+        &mo 1 &kp PSCRN
       >;
     };
 
-    /* =========================
-     * LAYER 3: mouse / navigation
-     * ========================= */
     mouse_layer {
       bindings = <
         /* row 0 (10) */
         &trans &trans &trans &trans &trans
         &trans &trans &trans &trans &trans
 
-        /* row 1 (12) : A=MB1, O=MB2 */
+        /* row 1 (12) */
         &trans  &trans  &trans  &mkp MB1  &mkp MB2  &trans
-        &trans  &trans  &trans  &trans    &trans    &enter_semi_ht
+        &trans  &trans  &trans  &trans    &trans
+        &enter_semi_ht  &kp ENTER   &semi_enter
 
         /* row 2 (12) */
         &kp LEFT_SHIFT &trans &trans &trans &trans &trans
         &trans &trans &trans &trans &trans &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &bspc_imeoff_ht
-        &space_imeon_ht     &mo 1 &kp PSCRN
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1
+        &bspc_imeoff_ht     &kp BACKSPACE   &kp INT_MUHENKAN
+        &space_imeon_ht     &kp SPACE       &kp INT_HENKAN
+        &mo 1 &kp PSCRN
       >;
     };
   };
