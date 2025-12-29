@@ -51,7 +51,7 @@
             tapping-term-ms = <200>;
 
             /* tap = BSPC / hold = IME OFF */
-            bindings = <&kp BSPC &kp INT_MUHENKAN>;
+            bindings = < &some_behavior &some_other_behavior >;
         };
 
 
