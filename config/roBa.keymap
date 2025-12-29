@@ -52,7 +52,7 @@
         &kp MINUS &kp LBKT       &kp RBKT       &kp CARET   &kp AT_SIGN   &kp ENTER
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  &trans   &trans         &trans       &CORON       &BACKSLASH
+        &kp LEFT_SHIFT  &trans   &trans         &trans       &kp CORON       &kp BACKSLASH
         &kp DOTE &kp SLASH       &trans         &trans       &trans       &kp RIGHT_SHIFT
 
         /* row 3 (9) */
