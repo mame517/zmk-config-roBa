@@ -62,37 +62,35 @@
 
     // ---------- レイヤ定義 ----------
     keymap {
-        compatible = "zmk,keymap";
+      compatible = "zmk,keymap";
 
         // ==============================
         // LAYER 0: ベースレイヤ
         // KLE の 0〜4 行 に相当
         // ==============================
         default_layer {
+        // 43 keys: 10 + 12 + 12 + 9
             bindings = <
-                // row 0 (12)
-                &kp ESC   &kp P   &kp E   &kp U   &kp G   XXX
-                &kp C     &kp R   &kp L   &kp MINUS &kp DEL XXX
-
-                // row 1 (12)
-                &kp TAB   &kp Y   &kp I   &kp A   &kp O   XXX
-                &kp D     &kp T   &kp N   &kp S   &kp H    &enter_semienter_ht
-
-                // row 2 (12)
-                &kp LSHFT &kp Q   &kp J   &kp K   &kp X   &kp F
-                &kp B     &kp M   &kp W   &kp V   &kp Z   &kp RSHFT
-
-                // row 3 (12)
-                &kp LCTRL &kp LALT &kp LGUI XXX XXX XXX
-                XXX XXX XXX XXX XXX &kp PSCRN
-
-                // row 4 (12)
-                // 左：マウス(layer3) / Fn(layer2) / 右：記号(layer1)
-                &space_imeon_ht  &mo 1  XXX  XXX  XXX  XXX   // 右手親指（左から space, layer1）
-                &mo 3            &mo 2  &bspc_imeoff_ht  XXX  XXX  XXX  // 左手親指（左から layer3, layer2, bspc）
-                >;
-            };
-
+                // Row 0 (10): 5L + 5R
+                &kp ESC   &kp P     &kp E     &kp U     &kp G
+                &kp C     &kp R     &kp L     &kp MINUS &kp PSCRN
+                // Row 1 (12): 6L + 6R
+                &kp TAB   &kp Y     &kp I     &kp A     &kp O     XXX
+                &kp D     &kp T     &kp N     &kp S     &kp H     &enter_semienter_ht
+                // Row 2 (12): 6L + 6R
+                &kp LSHFT &kp Q     &kp J     &kp K     &kp X     &kp F
+                &kp B     &kp M     &kp W     &kp V     &kp Z     &kp RSHFT
+                // Row 3 (9): 6L + 3R  ← 親指はここに入ります（60配列の row4 は存在しません）
+                // 左手下段(6) = Ctrl/Alt/Win + 親指3つ（あなたの希望通り）
+                &kp LCTRL &kp LALT  &kp LGUI  &mo 3     &mo 2     &bspc_imeoff_ht
+                // 右手下段(3) = Space/IMEON + layer1 + Del
+                &space_imeon_ht     &mo 1     &kp DEL
+            >;
+    
+            // エンコーダ（Fの上の“スクロールバー”がこれなら、ここで割り当てないと動きません）
+            // まずは無難に「上/下キー」にして挙動確認するのが安全です
+            sensor-bindings = <&inc_dec_kp &kp DOWN &kp UP>;
+        };
 
         // ==============================
         // LAYER 1: 記号／数字レイヤ
@@ -100,26 +98,21 @@
         // ==============================
         symbol_layer {
             bindings = <
-                // row 0 (12)
-                &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6
-                &kp N7 &kp N8 &kp N9 &kp N0 XXX XXX
-
-                // row 1 (12)
+                // Row 0 (10)
+                &kp N1 &kp N2 &kp N3 &kp N4 &kp N5
+                &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
+                // Row 1 (12)
                 &kp TAB XXX &kp SEMI &kp COMMA &kp DOT &kp MINUS
-                &kp LBKT &kp RBKT XXX XXX &kp ENTER XXX
-
-                // row 2 (12)
+                &kp LBKT &kp RBKT XXX XXX XXX &kp ENTER
+                // Row 2 (12)
                 &kp LSHFT XXX XXX XXX XXX XXX
                 XXX XXX XXX XXX XXX &kp RSHFT
-
-                // row 3 (12)
-                &kp LCTRL XXX &kp LGUI XXX XXX XXX
-                XXX XXX XXX XXX XXX &kp DEL
-
-                // row 4 (12)  ※ベースと同じ
-                &space_imeon_ht  &mo 1  XXX  XXX  XXX  XXX   // 右手親指（左から space, layer1）
-                &mo 3            &mo 2  &bspc_imeoff_ht  XXX  XXX  XXX  // 左手親指（左から layer3, layer2, bspc）
+                // Row 3 (9) ※親指/下段はベースと同じにしておく
+              &kp LCTRL &kp LALT &kp LGUI &mo 3 &mo 2 &bspc_imeoff_ht
+              &space_imeon_ht &mo 1 &kp DEL
             >;
+    
+            sensor-bindings = <&inc_dec_kp &kp DOWN &kp UP>;
         };
 
         // ==============================
@@ -128,26 +121,21 @@
         // ==============================
         fn_layer {
             bindings = <
-                // row 0 (12)
-                &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6
-                &kp F7 &kp F8 &kp F9 &kp F10 XXX XXX
-
-                // row 1 (12)
-                &kp TAB &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp F11
-                &kp F12 &kp LC(F) &kp LC(H) &kp LC(SLASH) &kp ENTER XXX
-
-                // row 2 (12)
+                // Row 0 (10)
+                &kp F1 &kp F2 &kp F3 &kp F4 &kp F5
+                &kp F6 &kp F7 &kp F8 &kp F9 &kp F10
+                // Row 1 (12)
+                &kp TAB &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) XXX
+                &kp F11 &kp F12 &kp LC(F) &kp LC(H) &kp ENTER XXX
+                // Row 2 (12)
                 &kp LSHFT &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(W) XXX
-                &kp LC(LEFT) &kp LC(RIGHT) &kp HOME &kp END XXX &kp RSHFT
-
-                // row 3 (12)
-                &kp LCTRL &kp LALT &kp LGUI &kp DEL &kp LC(BSPC) XXX
-                XXX XXX XXX XXX XXX XXX
-
-                // row 4 (12)
-                &space_imeon_ht  &mo 1  XXX  XXX  XXX  XXX   // 右手親指（左から space, layer1）
-                &mo 3            &mo 2  &bspc_imeoff_ht  XXX  XXX  XXX  // 左手親指（左から layer3, layer2, bspc）
+                &kp HOME &kp END &kp LEFT &kp RIGHT XXX &kp RSHFT
+                // Row 3 (9)
+                &kp LCTRL &kp LALT &kp LGUI &mo 3 &mo 2 &bspc_imeoff_ht
+                &space_imeon_ht &mo 1 &kp DEL
             >;
+
+            sensor-bindings = <&inc_dec_kp &kp DOWN &kp UP>;
         };
 
         // ==============================
@@ -155,26 +143,26 @@
         // ==============================
         mouse_layer {
             bindings = <
-                // row 0 (12)
+                // Row 0 (10)
+                XXX XXX XXX XXX XXX
+                XXX XXX XXX XXX XXX
+    
+                // Row 1 (12)
                 XXX XXX XXX XXX XXX XXX
                 XXX XXX XXX XXX XXX XXX
-
-                // row 1 (12)
+    
+                // Row 2 (12)
                 XXX XXX XXX XXX XXX XXX
                 XXX XXX XXX XXX XXX XXX
-
-                // row 2 (12)
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX XXX
-
-                // row 3 (12) クリックを押しやすい場所に置く例（右側の終端2つ）
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX &mkp LCLK &mkp RCLK
-
-                // row 4 (12) 親指はベースと同じ
-                &space_imeon_ht  &mo 1  XXX  XXX  XXX  XXX   // 右手親指（左から space, layer1）
-                &mo 3            &mo 2  &bspc_imeoff_ht  XXX  XXX  XXX  // 左手親指（左から layer3, layer2, bspc）
+    
+                // Row 3 (9): 右クリック/左クリックを置く例（右手側に2つ）
+                &kp LCTRL &kp LALT &kp LGUI &mo 3 &mo 2 &bspc_imeoff_ht
+                &mkp LCLK &mkp RCLK &kp DEL
             >;
+
+            // エンコーダをスクロールにしたいなら、まずここを “マウススクロール” に変更するのが理想だけど、
+            // 環境によって挙動が変わるので最初は UP/DOWN でOK
+            sensor-bindings = <&inc_dec_kp &kp DOWN &kp UP>;
         };
     };
 };
