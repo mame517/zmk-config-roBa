@@ -2,8 +2,8 @@
 #include <dt-bindings/zmk/keys.h>
 
 /*
- * roBa は roBa.dtsi の matrix-transform が 4行構成です。
- * ここも 4行ぶん（10 / 12 / 12 / 9 = 合計43）で bindings を書きます。
+ * roBa の matrix-transform は 4行（10 / 12 / 12 / 9 = 合計43）です。
+ * 各レイヤーの bindings も必ず 43 個に揃えます。
  */
 
 #define XXX &none
@@ -22,71 +22,40 @@
   };
 
   behaviors {
-    /* ---- tap/hold 用の下請け behaviors（ここが重要） ---- */
-    bspc_kp: bspc_kp {
-      compatible = "zmk,behavior-key-press";
-      label = "BSPC_KP";
-      #binding-cells = <0>;
-      bindings = <&kp BSPC>;
-    };
+    /*
+     * Hold-Tap は #binding-cells = <2>（パラメータ2つ）固定です。
+     * 1つ目=hold側に渡す値、2つ目=tap側に渡す値。
+     */
 
-    space_kp: space_kp {
-      compatible = "zmk,behavior-key-press";
-      label = "SPACE_KP";
-      #binding-cells = <0>;
-      bindings = <&kp SPACE>;
-    };
-
-    enter_kp: enter_kp {
-      compatible = "zmk,behavior-key-press";
-      label = "ENTER_KP";
-      #binding-cells = <0>;
-      bindings = <&kp ENTER>;
-    };
-
-    ime_off_kp: ime_off_kp {
-      compatible = "zmk,behavior-key-press";
-      label = "IME_OFF_KP";
-      #binding-cells = <0>;
-      bindings = <&kp INT_MUHENKAN>;
-    };
-
-    ime_on_kp: ime_on_kp {
-      compatible = "zmk,behavior-key-press";
-      label = "IME_ON_KP";
-      #binding-cells = <0>;
-      bindings = <&kp INT_HENKAN>;
-    };
-
-    /* ---- hold-tap 本体（bindings には “node label” だけを書く） ---- */
-    // tap: Backspace / hold: 無変換（IME OFF寄せ）
+    /* tap: Backspace / hold: 無変換（IME OFF寄せ） */
     bspc_imeoff_ht: bspc_imeoff_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "BSPC_IMEOFF_HT";
-      #binding-cells = <0>;
+      #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&bspc_kp &ime_off_kp>;
+      bindings = <&kp>, <&kp>;
     };
 
-    // tap: Space / hold: 変換（IME ON寄せ）
+    /* tap: Space / hold: 変換（IME ON寄せ） */
     space_imeon_ht: space_imeon_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "SPACE_IMEON_HT";
-      #binding-cells = <0>;
+      #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&space_kp &ime_on_kp>;
+      bindings = <&kp>, <&kp>;
     };
 
-    // tap: Enter / hold: Enter→;
+    /* tap: Enter / hold: Enter→;（マクロ） */
     enter_semi_ht: enter_semi_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "ENTER_SEMI_HT";
-      #binding-cells = <0>;
+      #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&enter_kp &enter_then_semi>;
+      /* hold=macro（パラメータ不要） / tap=&kp */
+      bindings = <&enter_then_semi>, <&kp>;
     };
   };
 
@@ -95,25 +64,27 @@
 
     /* =========================
      * LAYER 0: base
-     * 10 / 12 / 12 / 9 = 43 keys
      * ========================= */
     default_layer {
       bindings = <
         /* row 0 (10) : 5L | 5R */
         &kp ESCAPE   &kp P       &kp E       &kp U       &kp G
-        &kp C        &kp R       &kp L       &kp MINUS   &kp DEL
+        &kp C        &kp R       &kp L       &kp MINUS   &kp DELETE
 
-        /* row 1 (12) : 6L | (thumb1) | 5R */
-        &kp TAB      &kp Y       &kp I       &kp A       &kp O       &trans
+        /* row 1 (12) : 6L | 6R */
+        &kp TAB      &kp Y       &kp I       &kp A       &kp O       XXX
         &mo 3        &kp D       &kp T       &kp N       &kp S       &kp H
 
-        /* row 2 (12) : 6L | (thumb2) | 5R */
-        &kp LSHIFT   &kp Q       &kp J       &kp K       &kp X       &kp F
-        &mo 2        &kp B       &kp M       &kp W       &kp V       &kp Z
+        /* row 2 (12) : 6L | 6R */
+        &kp LEFT_SHIFT  &kp Q    &kp J       &kp K       &kp X       &kp F
+        &mo 2           &kp B    &kp M       &kp W       &kp V       &kp Z
 
-        /* row 3 (9) : 6L | (thumb3)(thumb4) | 1R */
-        &kp LCTRL    &kp LALT    &kp LGUI    &trans         &trans         &trans
-        &bspc_imeoff_ht  &space_imeon_ht    &enter_semi_ht
+        /* row 3 (9) : 6L | 3R(thumb) */
+        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  XXX  XXX  XXX
+        /* 1=hold, 2=tap */
+        &bspc_imeoff_ht INT_MUHENKAN BACKSPACE
+        &space_imeon_ht INT_HENKAN SPACE
+        &enter_semi_ht 0 ENTER
       >;
     };
 
@@ -127,21 +98,23 @@
         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0
 
         /* row 1 (12) */
-        &kp TAB   &trans       &kp SEMICOLON  &kp COMMA   &kp DOT    &trans
-        &mo 3     &kp LBKT  &kp RBKT       &kp MINUS   &kp EQUAL  &kp BACKSLASH
+        &kp TAB   XXX           &kp SEMICOLON  &kp COMMA   &kp DOT     XXX
+        &mo 3     &kp LBKT      &kp RBKT       &kp MINUS   &kp EQUAL   &kp BACKSLASH
 
         /* row 2 (12) */
-        &kp LSHIFT  &trans     &trans       &trans       &trans       &trans
-        &mo 2       &kp GRAVE  &kp SQT  &kp SLASH  &kp QUESTION  &kp EXCLAMATION
+        &kp LEFT_SHIFT  XXX     XXX     XXX     XXX     XXX
+        &mo 2           &kp GRAVE  &kp SQT  &kp SLASH  &kp EXCL  &kp QUESTION
 
         /* row 3 (9) */
-        &kp LCTRL   &kp LALT  &kp LGUI  &trans  &trans  &trans
-        &bspc_imeoff_ht  &space_imeon_ht  &enter_semi_ht
+        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  XXX  XXX  XXX
+        &bspc_imeoff_ht INT_MUHENKAN BACKSPACE
+        &space_imeon_ht INT_HENKAN SPACE
+        &enter_semi_ht 0 ENTER
       >;
     };
 
     /* =========================
-     * LAYER 2: fn
+     * LAYER 2: fn（myboard.keymapのショートカットを復元）
      * ========================= */
     fn_layer {
       bindings = <
@@ -150,35 +123,43 @@
         &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
 
         /* row 1 (12) */
-        &kp TAB  &trans      &trans      &trans      &trans      &trans
-        &mo 3    &trans      &trans      &trans      &trans      &trans
+        &kp TAB  &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   XXX
+        &mo 3    &kp F11     &kp F12     XXX         XXX         XXX
 
         /* row 2 (12) */
-        &kp LSHIFT  &trans   &trans   &trans   &trans   &trans
-        &mo 2       &trans   &trans   &trans   &trans   &trans
+        &kp LEFT_SHIFT  &kp LC(A)  &kp LC(S)  &kp LC(D)  &kp LC(F)  &kp LC(G)
+        &mo 2           XXX        XXX        &kp HOME   &kp END    &kp DELETE
 
         /* row 3 (9) */
-        &kp LCTRL  &kp LALT  &kp LGUI  &trans  &trans  &trans
-        &bspc_imeoff_ht  &space_imeon_ht  &enter_semi_ht
+        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  XXX  XXX  XXX
+        &bspc_imeoff_ht INT_MUHENKAN BACKSPACE
+        &space_imeon_ht INT_HENKAN SPACE
+        &enter_semi_ht 0 ENTER
       >;
     };
 
     /* =========================
-     * LAYER 3: いったん空（ここにクリック等を後で入れる想定）
+     * LAYER 3: mouse（A=左クリック / O=右クリック）
      * ========================= */
     layer_3 {
       bindings = <
-        &trans &trans &trans &trans &trans
-        &trans &trans &trans &trans &trans
+        /* row 0 (10) */
+        XXX  XXX  XXX  XXX  XXX
+        XXX  XXX  XXX  XXX  XXX
 
-        &trans &trans &trans &trans &trans &trans
-        &trans &trans &trans &trans &trans &trans
+        /* row 1 (12) */
+        XXX  XXX  XXX  &mkp LCLK  &mkp RCLK  XXX
+        XXX  XXX  XXX  XXX        XXX        XXX
 
-        &trans &trans &trans &trans &trans &trans
-        &trans &trans &trans &trans &trans &trans
+        /* row 2 (12) */
+        XXX  XXX  XXX  XXX  XXX  XXX
+        XXX  XXX  XXX  XXX  XXX  XXX
 
-        &trans &trans &trans &trans &trans &trans
-        &trans &trans &trans
+        /* row 3 (9) */
+        XXX  XXX  XXX  XXX  XXX  XXX
+        &bspc_imeoff_ht INT_MUHENKAN BACKSPACE
+        &space_imeon_ht INT_HENKAN SPACE
+        &enter_semi_ht 0 ENTER
       >;
     };
   };
