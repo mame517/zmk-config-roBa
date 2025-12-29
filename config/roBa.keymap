@@ -56,13 +56,14 @@
   /* =========================
    * Hold-Tap behaviors
    * ========================= */
-  behaviors {
+    behaviors {
 
     bspc_imeoff_ht: bspc_imeoff_ht {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <250>;
+      bindings = <&bspc_kp &ime_off_kp>;
     };
 
     space_imeon_ht: space_imeon_ht {
@@ -70,6 +71,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <250>;
+      bindings = <&space_kp &ime_on_kp>;
     };
 
     enter_semi_ht: enter_semi_ht {
@@ -77,8 +79,10 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <250>;
+      bindings = <&enter_kp &semi_enter>;
     };
   };
+
 
 
 
