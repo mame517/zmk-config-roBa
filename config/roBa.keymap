@@ -20,37 +20,72 @@
         &kp SEMICOLON
       >;
     };
+
+    /* 追加：hold-tap の中で &kp <key> を直接使わないためのラッパ */
+    m_bspc: m_bspc {
+      compatible = "zmk,behavior-macro";
+      label = "M_BSPC";
+      #binding-cells = <0>;
+      bindings = < &kp BACKSPACE >;
+    };
+
+    m_muhenkan: m_muhenkan {
+      compatible = "zmk,behavior-macro";
+      label = "M_MUHENKAN";
+      #binding-cells = <0>;
+      bindings = < &kp INT_MUHENKAN >;
+    };
+
+    m_space: m_space {
+      compatible = "zmk,behavior-macro";
+      label = "M_SPACE";
+      #binding-cells = <0>;
+      bindings = < &kp SPACE >;
+    };
+
+    m_henkan: m_henkan {
+      compatible = "zmk,behavior-macro";
+      label = "M_HENKAN";
+      #binding-cells = <0>;
+      bindings = < &kp INT_HENKAN >;
+    };
+
+    m_enter: m_enter {
+      compatible = "zmk,behavior-macro";
+      label = "M_ENTER";
+      #binding-cells = <0>;
+      bindings = < &kp ENTER >;
+    };
   };
 
   behaviors {
-    /* tap: Backspace / hold: 無変換 (IME OFF寄せ) */
     bspc_imeoff_ht: bspc_imeoff_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "BSPC_IMEOFF_HT";
       #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp BACKSPACE &kp INT_MUHENKAN>;
+      /* 修正：phandleだけにする */
+      bindings = < &m_bspc &m_muhenkan >;
     };
 
-    /* tap: Space / hold: 変換 (IME ON寄せ) */
     space_imeon_ht: space_imeon_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "SPACE_IMEON_HT";
       #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp SPACE &kp INT_HENKAN>;
+      bindings = < &m_space &m_henkan >;
     };
 
-    /* tap: Enter / hold: Enter→; */
     enter_semi_ht: enter_semi_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "ENTER_SEMI_HT";
       #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp ENTER &enter_then_semi>;
+      /* tap=Enter, hold=Enter→;（既存マクロをそのまま使う） */
+      bindings = < &m_enter &enter_then_semi >;
     };
   };
 
