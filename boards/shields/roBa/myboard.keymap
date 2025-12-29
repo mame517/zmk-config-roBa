@@ -76,7 +76,7 @@
 
                 // row 1 (12)
                 &kp TAB   &kp Y   &kp I   &kp A   &kp O   XXX
-                &kp D     &kp H   &kp T   &kp N   &kp S   &enter_semienter_ht
+                &kp D     &kp T   &kp N   &kp S   &kp H    &enter_semienter_ht
 
                 // row 2 (12)
                 &kp LSHFT &kp Q   &kp J   &kp K   &kp X   &kp F
