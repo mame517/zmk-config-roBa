@@ -21,33 +21,34 @@
   };
 
   behaviors {
-    bspc_imeoff_ht: bspc_imeoff_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <250>;
-      bindings = <&kp INT_MUHENKAN>, <&kp BACKSPACE>;
-      /* hold: IME OFF / tap: BACKSPACE */
-    };
-
-    space_imeon_ht: space_imeon_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <250>;
-      bindings = <&kp INT_HENKAN>, <&kp SPACE>;
-      /* hold: IME ON / tap: SPACE */
-    };
-
-    enter_semi_ht: enter_semi_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <250>;
-      bindings = <&semi_enter>, <&kp ENTER>;
-      /* hold: ; → ENTER / tap: ENTER */
-    };
+  bspc_imeoff_ht: bspc_imeoff_ht {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <250>;
+    /* tap: BSPC / hold: IME OFF */
+    bindings = <&kp BSPC &kp INT_MUHENKAN>;
   };
+
+  space_imeon_ht: space_imeon_ht {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <250>;
+    /* tap: SPACE / hold: IME ON */
+    bindings = <&kp SPACE &kp INT_HENKAN>;
+  };
+
+  enter_semi_ht: enter_semi_ht {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <250>;
+    /* tap: ENTER / hold: ; → ENTER */
+    bindings = <&kp ENTER &semi_enter>;
+  };
+};
+
 
   keymap {
     compatible = "zmk,keymap";
