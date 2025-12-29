@@ -20,17 +20,6 @@
 
     // ---------- 振る舞い定義 ----------
     behaviors {
-        // タップ：; / 長押し：; + Enter
-        semicolon_ht: semicolon_ht {
-            compatible = "zmk,behavior-hold-tap";
-            label = "SEMICOLON_HT";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";   // 好みで balanced 等に変更可
-            tapping-term-ms = <200>;    // 200ms 以上で長押し判定
-
-            // bindings = <hold側のbehavior>, <tap側のbehavior>
-            bindings = <&semicolon_enter>, <&kp>;
-        };
 
         bspc_imeoff_ht: bspc_imeoff_ht {
             compatible = "zmk,behavior-hold-tap";
@@ -81,28 +70,29 @@
         // ==============================
         default_layer {
             bindings = <
-                // row 0: escp, P, E, U, G | C, R, L, _, prsc
-                &kp ESC    &kp P      &kp E      &kp U      &kp G      XXX
-                &kp C      &kp R      &kp L      &kp MINUS  &kp PSCRN  XXX
+                // row 0 (12)
+                &kp ESC   &kp P   &kp E   &kp U   &kp G   XXX
+                &kp C     &kp R   &kp L   &kp MINUS &kp DEL XXX
 
-                // row 1: tab, Y, I, A, O | D, H, T, N, S, Enter(;Ent)
-                &kp TAB    &kp Y      &kp I      &kp A      &kp O      XXX
-                &kp D      &kp H      &kp T      &kp N      &kp S      &enter_semienter_ht
+                // row 1 (12)
+                &kp TAB   &kp Y   &kp I   &kp A   &kp O   XXX
+                &kp D     &kp H   &kp T   &kp N   &kp S   &enter_semienter_ht
 
-                // row 2: Shift, Q, J, K, X, F | B, M, W, V, Z, Shift
-                &kp LSHFT  &kp Q      &kp J      &kp K      &kp X      &kp F
-                &kp B      &kp M      &kp W      &kp V      &kp Z      &kp RSHFT
+                // row 2 (12)
+                &kp LSHFT &kp Q   &kp J   &kp K   &kp X   &kp F
+                &kp B     &kp M   &kp W   &kp V   &kp Z   &kp RSHFT
 
-                // row 3: Ctrl, Alt, Win | del （他は空き）
-                &kp LCTRL  &kp LALT   &kp LGUI   XXX        XXX        XXX
-                XXX        XXX        XXX        XXX        XXX        &kp DEL
+                // row 3 (12)
+                &kp LCTRL &kp LALT &kp LGUI XXX XXX XXX
+                XXX XXX XXX XXX XXX &kp PSCRN
 
-                // row 4: layer3, layer2, bkspc IMFoff | Space IMFon, layer1
-                // layer3 → Fn レイヤ (2), layer2 → 記号レイヤ (1), layer1 → ベースへ戻る
-                &mo 3      &mo 2      &bspc_imeoff_ht   XXX        XXX        XXX
-                XXX        &kp SPACE&space_imeon_ht  mo 1      XXX        XXX        XXX
-            >;
-        };
+                // row 4 (12)
+                // 左：マウス(layer3) / Fn(layer2) / 右：記号(layer1)
+                &mo 3     &mo 2   &bspc_imeoff_ht XXX XXX XXX
+                XXX       &space_imeon_ht &mo 1   XXX XXX XXX
+                >;
+            };
+
 
         // ==============================
         // LAYER 1: 記号／数字レイヤ
@@ -110,25 +100,25 @@
         // ==============================
         symbol_layer {
             bindings = <
-                // row 0: "! 1", " 2", "# 3", ... ") 9", " 0"
-                &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &kp N6
-                &kp N7     &kp N8     &kp N9     &kp N0     XXX        XXX
+                // row 0 (12)
+                &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6
+                &kp N7 &kp N8 &kp N9 &kp N0 XXX XXX
 
-                // row 1: tab, (空), "+ ;", "< ,", "> .", "= -", "{ [", "} ]", "~ ^", "` @", Enter
-                &kp TAB    XXX        &kp SEMI   &kp COMMA  &kp DOT    &kp MINUS
-                &kp LBKT   &kp RBKT   /* ~ ^ */ XXX         /* ` @ */ XXX        &kp ENTER
+                // row 1 (12)
+                &kp TAB XXX &kp SEMI &kp COMMA &kp DOT &kp MINUS
+                &kp LBKT &kp RBKT XXX XXX &kp ENTER XXX
 
-                // row 2: Shift, (空), (空), "|", "* :", "_", "> .", "? /", (空×3), Shift
-                &kp LSHFT  XXX        XXX        /* | */ XXX  /* * : */ XXX  /* _ */ &kp MINUS
-                &kp DOT    &kp SLASH  XXX        XXX        XXX        &kp RSHFT
+                // row 2 (12)
+                &kp LSHFT XXX XXX XXX XXX XXX
+                XXX XXX XXX XXX XXX &kp RSHFT
 
-                // row 3: Ctrl, (空), Win, del
-                &kp LCTRL  XXX        &kp LGUI   XXX        XXX        XXX
-                XXX        XXX        XXX        XXX        XXX        &kp DEL
+                // row 3 (12)
+                &kp LCTRL XXX &kp LGUI XXX XXX XXX
+                XXX XXX XXX XXX XXX &kp DEL
 
-                // row 4: レイヤキーはベースと同じ構成
-                &mo 3      &mo 2      &bspc_imeoff_ht   XXX        XXX        XXX
-                XXX        &space_imeon_ht  &mo 1      XXX        XXX        XXX
+                // row 4 (12)  ※ベースと同じ
+                &mo 3 &mo 2 &bspc_imeoff_ht XXX XXX XXX
+                XXX   &space_imeon_ht &mo 1 XXX XXX XXX
             >;
         };
 
@@ -138,53 +128,52 @@
         // ==============================
         fn_layer {
             bindings = <
-                // row 0: F1〜F10
-                &kp F1     &kp F2     &kp F3     &kp F4     &kp F5     &kp F6
-                &kp F7     &kp F8     &kp F9     &kp F10    XXX        XXX
+                // row 0 (12)
+                &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6
+                &kp F7 &kp F8 &kp F9 &kp F10 XXX XXX
 
-                // row 1: tab, Ctrl+Z, Ctrl+X, Ctrl+C, Ctrl+V | F11, F12, Ctrl+F, Ctrl+H, Ctrl+/, Enter
-                &kp TAB    &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp F11
-                &kp F12    &kp LC(F)  &kp LC(H)  &kp LC(SLASH) &kp ENTER
+                // row 1 (12)
+                &kp TAB &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp F11
+                &kp F12 &kp LC(F) &kp LC(H) &kp LC(SLASH) &kp ENTER XXX
 
-                // row 2: Shift, Ctrl+A, Ctrl+S, Ctrl+D, Ctrl+W | Ctrl+Left, Ctrl+Right, Home, End, Shift
-                &kp LSHFT  &kp LC(A)  &kp LC(S)  &kp LC(D)  &kp LC(W)
-                &kp LC(LEFT) &kp LC(RIGHT) &kp HOME &kp END &kp RSHFT
+                // row 2 (12)
+                &kp LSHFT &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(W) XXX
+                &kp LC(LEFT) &kp LC(RIGHT) &kp HOME &kp END XXX &kp RSHFT
 
-                // row 3: Ctrl, Alt, Win | Delete, Ctrl+Backspace
-                &kp LCTRL  &kp LALT   &kp LGUI   &kp DEL    &kp LC(BSPC) XXX
-                XXX        XXX        XXX        XXX        XXX           XXX
+                // row 3 (12)
+                &kp LCTRL &kp LALT &kp LGUI &kp DEL &kp LC(BSPC) XXX
+                XXX XXX XXX XXX XXX XXX
 
-                // row 4: 親指（ベースと同じ）
-                &mo 3      &mo 2      &bspc_imeoff_ht XXX   XXX        XXX
-                XXX        &space_imeon_ht &mo 1     XXX   XXX        XXX
+                // row 4 (12)
+                &mo 3 &mo 2 &bspc_imeoff_ht XXX XXX XXX
+                XXX   &space_imeon_ht &mo 1 XXX XXX XXX
             >;
         };
 
         // ==============================
         // LAYER 3: 予備　左右クリックなど
         // ==============================
-        default_layer {
+        mouse_layer {
             bindings = <
-                // row 0: escp, P, E, U, G | C, R, L, _, prsc
-                &kp ESC    &kp P      &kp E      &kp U      &kp G      XXX
-                &kp C      &kp R      &kp L      &kp MINUS  &kp PSCRN  XXX
+                // row 0 (12)
+                XXX XXX XXX XXX XXX XXX
+                XXX XXX XXX XXX XXX XXX
 
-                // row 1: tab, Y, I, A, O | D, H, T, N, S, Enter(;Ent)
-                &kp TAB    &kp Y      &kp I      &mkp LCLK   &mkp RCLK    XXX
-                &kp D      &kp H      &kp T      &kp N      &kp S      &enter_semienter_ht
+                // row 1 (12)
+                XXX XXX XXX XXX XXX XXX
+                XXX XXX XXX XXX XXX XXX
 
-                // row 2: Shift, Q, J, K, X, F | B, M, W, V, Z, Shift
-                &kp LSHFT  &kp Q      &kp J      &kp K      &kp X      &kp F
-                &kp B      &kp M      &kp W      &kp V      &kp Z      &kp RSHFT
+                // row 2 (12)
+                XXX XXX XXX XXX XXX XXX
+                XXX XXX XXX XXX XXX XXX
 
-                // row 3: Ctrl, Alt, Win | del （他は空き）
-                &kp LCTRL  &kp LALT   &kp LGUI   XXX        XXX        XXX
-                XXX        XXX        XXX        XXX        XXX        &kp DEL
+                // row 3 (12) クリックを押しやすい場所に置く例（右側の終端2つ）
+                XXX XXX XXX XXX XXX XXX
+                XXX XXX XXX XXX &mkp LCLK &mkp RCLK
 
-                // row 4: layer3, layer2, bkspc IMFoff | Space IMFon, layer1
-                // layer3 → Fn レイヤ (2), layer2 → 記号レイヤ (1), layer1 → ベースへ戻る
-                &mo 3      &mo 2      &bspc_imeoff_ht   XXX        XXX        XXX
-                XXX        &kp SPACE&space_imeon_ht  mo 1      XXX        XXX        XXX
+                // row 4 (12) 親指はベースと同じ
+                &mo 3 &mo 2 &bspc_imeoff_ht XXX XXX XXX
+                XXX   &space_imeon_ht &mo 1 XXX XXX XXX
             >;
         };
     };
