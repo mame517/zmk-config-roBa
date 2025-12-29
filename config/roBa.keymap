@@ -56,7 +56,37 @@
   /* =========================
    * Hold-Tap behaviors
    * ========================= */
-    behaviors {
+     behaviors {
+
+    bspc_kp: bspc_kp {
+      compatible = "zmk,behavior-key-press";
+      #binding-cells = <0>;
+      bindings = <&kp BACKSPACE>;
+    };
+
+    space_kp: space_kp {
+      compatible = "zmk,behavior-key-press";
+      #binding-cells = <0>;
+      bindings = <&kp SPACE>;
+    };
+
+    enter_kp: enter_kp {
+      compatible = "zmk,behavior-key-press";
+      #binding-cells = <0>;
+      bindings = <&kp ENTER>;
+    };
+
+    ime_on_kp: ime_on_kp {
+      compatible = "zmk,behavior-key-press";
+      #binding-cells = <0>;
+      bindings = <&kp INT_HENKAN>;
+    };
+
+    ime_off_kp: ime_off_kp {
+      compatible = "zmk,behavior-key-press";
+      #binding-cells = <0>;
+      bindings = <&kp INT_MUHENKAN>;
+    };
 
     bspc_imeoff_ht: bspc_imeoff_ht {
       compatible = "zmk,behavior-hold-tap";
@@ -73,15 +103,8 @@
       tapping-term-ms = <250>;
       bindings = <&space_kp &ime_on_kp>;
     };
-
-    enter_semi_ht: enter_semi_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <250>;
-      bindings = <&enter_kp &semi_enter>;
-    };
   };
+};
 
 
 
