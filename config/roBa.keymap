@@ -10,55 +10,6 @@
 #define XXX &none
 
 / {
-  macros {
-    enter_then_semi: enter_then_semi {
-      compatible = "zmk,behavior-macro";
-      label = "ENTER_THEN_SEMI";
-      #binding-cells = <0>;
-      bindings = <
-        &kp ENTER
-        &kp SEMICOLON
-      >;
-    };
-
-    /* 追加：hold-tap の中で &kp <key> を直接使わないためのラッパ */
-    m_bspc: m_bspc {
-      compatible = "zmk,behavior-macro";
-      label = "M_BSPC";
-      #binding-cells = <0>;
-      bindings = < &kp BACKSPACE >;
-    };
-
-    m_muhenkan: m_muhenkan {
-      compatible = "zmk,behavior-macro";
-      label = "M_MUHENKAN";
-      #binding-cells = <0>;
-      bindings = < &kp INT_MUHENKAN >;
-    };
-
-    m_space: m_space {
-      compatible = "zmk,behavior-macro";
-      label = "M_SPACE";
-      #binding-cells = <0>;
-      bindings = < &kp SPACE >;
-    };
-
-    m_henkan: m_henkan {
-      compatible = "zmk,behavior-macro";
-      label = "M_HENKAN";
-      #binding-cells = <0>;
-      bindings = < &kp INT_HENKAN >;
-    };
-
-    m_enter: m_enter {
-      compatible = "zmk,behavior-macro";
-      label = "M_ENTER";
-      #binding-cells = <0>;
-      bindings = < &kp ENTER >;
-    };
-  };
-
-
 
   keymap {
     compatible = "zmk,keymap";
