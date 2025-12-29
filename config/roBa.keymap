@@ -1,233 +1,185 @@
-/*
- * roBa.keymap (repaired)
- * - Based on myboard.keymap (intended behaviors/layers)
- * - Keeps roBa trackball settings (automouse/scroll layers)
- * - Fixes DTS parse errors and replaces IME_ON/IME_OFF with INT_HENKAN/INT_MUHENKAN
- */
-
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/pointing.h>
+
+/*
+ * roBa は roBa.dtsi の matrix-transform が 4行構成です。
+ * ここも 4行ぶん（10 / 12 / 12 / 9 = 合計43）で bindings を書きます。
+ */
 
 #define XXX &none
 
-&mt {
-    flavor = "balanced";
-    quick-tap-ms = <0>;
-};
+/ {
+  macros {
+    enter_then_semi: enter_then_semi {
+      compatible = "zmk,behavior-macro";
+      label = "ENTER_THEN_SEMI";
+      #binding-cells = <0>;
+      bindings = <
+        &kp ENTER
+        &kp SEMICOLON
+      >;
+    };
+  };
 
-&trackball {
-    /* keep roBa defaults */
-    automouse-layer = <4>;
-    scroll-layers = <5>;
-
-};
-
- / {
-    macros {
-        compatible = "zmk,macros";
-
-        /* sends ';' then 'Enter' */
-        semicolon_enter: semicolon_enter {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <0>;
-            tap-ms = <0>;
-            bindings = <&kp SEMI &kp ENTER>;
-        };
+  behaviors {
+    /* ---- tap/hold 用の下請け behaviors（ここが重要） ---- */
+    bspc_kp: bspc_kp {
+      compatible = "zmk,behavior-key-press";
+      label = "BSPC_KP";
+      #binding-cells = <0>;
+      bindings = <&kp BSPC>;
     };
 
-    behaviors {
-        compatible = "zmk,behaviors";
-
-        /* Backspace tap / IME OFF (Muhenkan) hold */
-        bspc_imeoff_ht: bspc_imeoff_ht {
-            compatible = "zmk,behavior-hold-tap";
-            label = "BSPC_IMEOFF_HT";
-            #binding-cells = <0>;
-
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-
-            /* tap = BSPC / hold = IME OFF */
-            bindings = < &some_behavior &some_other_behavior >;
-        };
-
-
-        /* Space tap / IME ON (Henkan) hold */
-        space_imeon_ht: space_imeon_ht {
-            compatible = "zmk,behavior-hold-tap";
-            label = "SPACE_IMEON_HT";
-            #binding-cells = <0>;
-
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-
-            bindings = <&kp SPACE &kp INT_HENKAN>;
-        };
-
-        /* Enter tap / ';'+Enter hold */
-        enter_semienter_ht: enter_semienter_ht {
-            compatible = "zmk,behavior-hold-tap";
-            label = "ENTER_SEMIENTER_HT";
-            #binding-cells = <0>;
-
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-
-            bindings = <&semicolon_enter &kp ENTER>;
-        };
+    space_kp: space_kp {
+      compatible = "zmk,behavior-key-press";
+      label = "SPACE_KP";
+      #binding-cells = <0>;
+      bindings = <&kp SPACE>;
     };
 
-    keymap {
-        compatible = "zmk,keymap";
-
-        /* LAYER 0: Base */
-        default_layer {
-            bindings = <
-                /* Row 0 (10): 5L + 5R */
-                &kp ESC   &kp P     &kp E     &kp U     &kp G
-                &kp C     &kp R     &kp L     &kp MINUS &kp PSCRN
-
-                /* Row 1 (12): 6L + 6R */
-                &kp TAB   &kp Y     &kp I     &kp A     &kp O     XXX
-                &kp D     &kp T     &kp N     &kp S     &kp H     &enter_semienter_ht
-
-                /* Row 2 (12): 6L + 6R */
-                &kp LSHFT &kp Q     &kp J     &kp K     &kp X     &kp F
-                &kp B     &kp M     &kp W     &kp V     &kp Z     &kp RSHFT
-
-                /* Row 3 (9): thumbs */
-                &kp LCTRL &kp LALT  &kp LGUI  &mo 3     &mo 2     &bspc_imeoff_ht
-                &space_imeon_ht     &mo 1     &kp DEL
-            >;
-
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
-        };
-
-        /* LAYER 1: Symbols / Numbers */
-        symbol_layer {
-            bindings = <
-                /* Row 0 (10) */
-                &kp N1 &kp N2 &kp N3 &kp N4 &kp N5
-                &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
-
-                /* Row 1 (12) */
-                &kp TAB XXX &kp SEMI &kp COMMA &kp DOT &kp MINUS
-                &kp LBKT &kp RBKT XXX XXX XXX &kp ENTER
-
-                /* Row 2 (12) */
-                &kp LSHFT XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX &kp RSHFT
-
-                /* Row 3 (9): keep thumbs same as base */
-                &kp LCTRL &kp LALT &kp LGUI &mo 3 &mo 2 &bspc_imeoff_ht
-                &space_imeon_ht &mo 1 &kp DEL
-            >;
-
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
-        };
-
-        /* LAYER 2: Fn / Shortcuts */
-        fn_layer {
-            bindings = <
-                /* Row 0 (10) */
-                &kp F1 &kp F2 &kp F3 &kp F4 &kp F5
-                &kp F6 &kp F7 &kp F8 &kp F9 &kp F10
-
-                /* Row 1 (12) */
-                &kp TAB &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) XXX
-                &kp F11 &kp F12 &kp LC(F) &kp LC(H) &kp ENTER XXX
-
-                /* Row 2 (12) */
-                &kp LSHFT &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(W) XXX
-                &kp HOME &kp END &kp LEFT &kp RIGHT XXX &kp RSHFT
-
-                /* Row 3 (9): keep thumbs same as base */
-                &kp LCTRL &kp LALT &kp LGUI &mo 3 &mo 2 &bspc_imeoff_ht
-                &space_imeon_ht &mo 1 &kp DEL
-            >;
-
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
-        };
-
-        /* LAYER 3: Mouse clicks (requested: put clicks at A/O positions) */
-        mouse_layer {
-            bindings = <
-                /* Row 0 (10) */
-                XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX
-
-                /* Row 1 (12): put clicks where A/O are on base (A then O positions) */
-                XXX XXX XXX &mkp LCLK &mkp RCLK XXX
-                XXX XXX XXX XXX XXX XXX
-
-                /* Row 2 (12) */
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX XXX
-
-                /* Row 3 (9): keep thumbs same as base */
-                &kp LCTRL &kp LALT &kp LGUI &mo 3 &mo 2 &bspc_imeoff_ht
-                &space_imeon_ht &mo 1 &kp DEL
-            >;
-
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
-        };
-
-        /* LAYER 4: automouse (movement) */
-        MOUSE {
-            bindings = <
-                XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX
-            >;
-
-            sensor-bindings = <&mmv 0 1>;
-        };
-
-        /* LAYER 5: scroll */
-        SCROLL {
-            bindings = <
-                XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX
-            >;
-
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
-        };
-
-        /* LAYER 6: BT */
-        layer_6 {
-            bindings = <
-                &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
-                XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX XXX XXX XXX XXX
-
-                XXX XXX XXX XXX XXX XXX
-                XXX XXX &bt BT_CLR_ALL
-            >;
-        };
+    enter_kp: enter_kp {
+      compatible = "zmk,behavior-key-press";
+      label = "ENTER_KP";
+      #binding-cells = <0>;
+      bindings = <&kp ENTER>;
     };
+
+    ime_off_kp: ime_off_kp {
+      compatible = "zmk,behavior-key-press";
+      label = "IME_OFF_KP";
+      #binding-cells = <0>;
+      bindings = <&kp INT_MUHENKAN>;
+    };
+
+    ime_on_kp: ime_on_kp {
+      compatible = "zmk,behavior-key-press";
+      label = "IME_ON_KP";
+      #binding-cells = <0>;
+      bindings = <&kp INT_HENKAN>;
+    };
+
+    /* ---- hold-tap 本体（bindings には “node label” だけを書く） ---- */
+    // tap: Backspace / hold: 無変換（IME OFF寄せ）
+    bspc_imeoff_ht: bspc_imeoff_ht {
+      compatible = "zmk,behavior-hold-tap";
+      label = "BSPC_IMEOFF_HT";
+      #binding-cells = <0>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&bspc_kp &ime_off_kp>;
+    };
+
+    // tap: Space / hold: 変換（IME ON寄せ）
+    space_imeon_ht: space_imeon_ht {
+      compatible = "zmk,behavior-hold-tap";
+      label = "SPACE_IMEON_HT";
+      #binding-cells = <0>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&space_kp &ime_on_kp>;
+    };
+
+    // tap: Enter / hold: Enter→;
+    enter_semi_ht: enter_semi_ht {
+      compatible = "zmk,behavior-hold-tap";
+      label = "ENTER_SEMI_HT";
+      #binding-cells = <0>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&enter_kp &enter_then_semi>;
+    };
+  };
+
+  keymap {
+    compatible = "zmk,keymap";
+
+    /* =========================
+     * LAYER 0: base
+     * 10 / 12 / 12 / 9 = 43 keys
+     * ========================= */
+    default_layer {
+      bindings = <
+        /* row 0 (10) : 5L | 5R */
+        &kp ESCAPE   &kp P       &kp E       &kp U       &kp G
+        &kp C        &kp R       &kp L       &kp MINUS   &kp DEL
+
+        /* row 1 (12) : 6L | (thumb1) | 5R */
+        &kp TAB      &kp Y       &kp I       &kp A       &kp O       &trans
+        &mo 3        &kp D       &kp T       &kp N       &kp S       &kp H
+
+        /* row 2 (12) : 6L | (thumb2) | 5R */
+        &kp LSHIFT   &kp Q       &kp J       &kp K       &kp X       &kp F
+        &mo 2        &kp B       &kp M       &kp W       &kp V       &kp Z
+
+        /* row 3 (9) : 6L | (thumb3)(thumb4) | 1R */
+        &kp LCTRL    &kp LALT    &kp LGUI    &trans         &trans         &trans
+        &bspc_imeoff_ht  &space_imeon_ht    &enter_semi_ht
+      >;
+    };
+
+    /* =========================
+     * LAYER 1: symbol
+     * ========================= */
+    symbol_layer {
+      bindings = <
+        /* row 0 (10) */
+        &kp N1    &kp N2    &kp N3    &kp N4    &kp N5
+        &kp N6    &kp N7    &kp N8    &kp N9    &kp N0
+
+        /* row 1 (12) */
+        &kp TAB   &trans       &kp SEMICOLON  &kp COMMA   &kp DOT    &trans
+        &mo 3     &kp LBKT  &kp RBKT       &kp MINUS   &kp EQUAL  &kp BACKSLASH
+
+        /* row 2 (12) */
+        &kp LSHIFT  &trans     &trans       &trans       &trans       &trans
+        &mo 2       &kp GRAVE  &kp SQT  &kp SLASH  &kp QUESTION  &kp EXCLAMATION
+
+        /* row 3 (9) */
+        &kp LCTRL   &kp LALT  &kp LGUI  &trans  &trans  &trans
+        &bspc_imeoff_ht  &space_imeon_ht  &enter_semi_ht
+      >;
+    };
+
+    /* =========================
+     * LAYER 2: fn
+     * ========================= */
+    fn_layer {
+      bindings = <
+        /* row 0 (10) */
+        &kp F1   &kp F2   &kp F3   &kp F4   &kp F5
+        &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
+
+        /* row 1 (12) */
+        &kp TAB  &trans      &trans      &trans      &trans      &trans
+        &mo 3    &trans      &trans      &trans      &trans      &trans
+
+        /* row 2 (12) */
+        &kp LSHIFT  &trans   &trans   &trans   &trans   &trans
+        &mo 2       &trans   &trans   &trans   &trans   &trans
+
+        /* row 3 (9) */
+        &kp LCTRL  &kp LALT  &kp LGUI  &trans  &trans  &trans
+        &bspc_imeoff_ht  &space_imeon_ht  &enter_semi_ht
+      >;
+    };
+
+    /* =========================
+     * LAYER 3: いったん空（ここにクリック等を後で入れる想定）
+     * ========================= */
+    layer_3 {
+      bindings = <
+        &trans &trans &trans &trans &trans
+        &trans &trans &trans &trans &trans
+
+        &trans &trans &trans &trans &trans &trans
+        &trans &trans &trans &trans &trans &trans
+
+        &trans &trans &trans &trans &trans &trans
+        &trans &trans &trans &trans &trans &trans
+
+        &trans &trans &trans &trans &trans &trans
+        &trans &trans &trans
+      >;
+    };
+  };
 };
