@@ -75,16 +75,16 @@
         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0
 
         /* row 1 (12) */
-        &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
-        &kp MINUS &kp LBKT       &kp RBKT       &kp LS(N6)  &kp LS(N2)
+        &kp TAB   &trans            &kp SEMICOLON           &kp COMMA   &kp DOT       &trans
+        &kp MINUS &kp LEFT_BRACKET  &kp RIGHT_BRACKET       &kp CARET   &kp LBKT
         &enter_semi_ht 0 ENTER
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp LS(SEMICOLON)  &kp BACKSLASH
+        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp CORON  &kp BACKSLASH
         &kp DOT         &kp SLASH  &trans         &trans     &trans             &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
         &bspc_imeoff_ht BACKSPACE INT_MUHENKAN
         &space_imeon_ht SPACE INT_HENKAN
         &mo 1 &kp PSCRN
@@ -107,7 +107,7 @@
         &kp HOME        &kp END   &kp LEFT  &kp RIGHT  &trans       &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
         &bspc_imeoff_ht BACKSPACE INT_MUHENKAN
         &space_imeon_ht SPACE INT_HENKAN
         &mo 1 &kp PSCRN
@@ -130,7 +130,7 @@
         &trans &trans &trans &trans &trans &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
         &bspc_imeoff_ht BACKSPACE INT_MUHENKAN
         &space_imeon_ht SPACE INT_HENKAN
         &mo 1 &kp PSCRN
