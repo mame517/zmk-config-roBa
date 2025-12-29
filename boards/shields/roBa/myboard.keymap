@@ -80,10 +80,7 @@
                 // Row 2 (12): 6L + 6R
                 &kp LSHFT &kp Q     &kp J     &kp K     &kp X     &kp F
                 &kp B     &kp M     &kp W     &kp V     &kp Z     &kp RSHFT
-                // Row 3 (9): 6L + 3R  ← 親指はここに入ります（60配列の row4 は存在しません）
-                // 左手下段(6) = Ctrl/Alt/Win + 親指3つ（あなたの希望通り）
                 &kp LCTRL &kp LALT  &kp LGUI  &mo 3     &mo 2     &bspc_imeoff_ht
-                // 右手下段(3) = Space/IMEON + layer1 + Del
                 &space_imeon_ht     &mo 1     &kp DEL
             >;
     
