@@ -24,7 +24,7 @@
         bspc_imeoff_ht: bspc_imeoff_ht {
             compatible = "zmk,behavior-hold-tap";
             label = "BSPC_IMEOFF_HT";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
 
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
@@ -36,7 +36,7 @@
         space_imeon_ht: space_imeon_ht {
             compatible = "zmk,behavior-hold-tap";
             label = "SPACE_IMEON_HT";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
 
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
@@ -48,7 +48,7 @@
         enter_semienter_ht: enter_semienter_ht {
             compatible = "zmk,behavior-hold-tap";
             label = "ENTER_SEMIENTER_HT";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
 
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
@@ -88,8 +88,8 @@
 
                 // row 4 (12)
                 // 左：マウス(layer3) / Fn(layer2) / 右：記号(layer1)
-                &mo 3     &mo 2   &bspc_imeoff_ht XXX XXX XXX
-                XXX       &space_imeon_ht &mo 1   XXX XXX XXX
+                &space_imeon_ht  &mo 1  XXX  XXX  XXX  XXX   // 右手親指（左から space, layer1）
+                &mo 3            &mo 2  &bspc_imeoff_ht  XXX  XXX  XXX  // 左手親指（左から layer3, layer2, bspc）
                 >;
             };
 
@@ -117,8 +117,8 @@
                 XXX XXX XXX XXX XXX &kp DEL
 
                 // row 4 (12)  ※ベースと同じ
-                &mo 3 &mo 2 &bspc_imeoff_ht XXX XXX XXX
-                XXX   &space_imeon_ht &mo 1 XXX XXX XXX
+                &space_imeon_ht  &mo 1  XXX  XXX  XXX  XXX   // 右手親指（左から space, layer1）
+                &mo 3            &mo 2  &bspc_imeoff_ht  XXX  XXX  XXX  // 左手親指（左から layer3, layer2, bspc）
             >;
         };
 
@@ -145,8 +145,8 @@
                 XXX XXX XXX XXX XXX XXX
 
                 // row 4 (12)
-                &mo 3 &mo 2 &bspc_imeoff_ht XXX XXX XXX
-                XXX   &space_imeon_ht &mo 1 XXX XXX XXX
+                &space_imeon_ht  &mo 1  XXX  XXX  XXX  XXX   // 右手親指（左から space, layer1）
+                &mo 3            &mo 2  &bspc_imeoff_ht  XXX  XXX  XXX  // 左手親指（左から layer3, layer2, bspc）
             >;
         };
 
@@ -172,8 +172,8 @@
                 XXX XXX XXX XXX &mkp LCLK &mkp RCLK
 
                 // row 4 (12) 親指はベースと同じ
-                &mo 3 &mo 2 &bspc_imeoff_ht XXX XXX XXX
-                XXX   &space_imeon_ht &mo 1 XXX XXX XXX
+                &space_imeon_ht  &mo 1  XXX  XXX  XXX  XXX   // 右手親指（左から space, layer1）
+                &mo 3            &mo 2  &bspc_imeoff_ht  XXX  XXX  XXX  // 左手親指（左から layer3, layer2, bspc）
             >;
         };
     };
