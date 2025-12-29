@@ -10,6 +10,41 @@
 #define XXX &none
 
 / {
+  macros {
+    semi_enter: semi_enter {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      tap-ms = <5>;
+      wait-ms = <5>;
+      bindings = <&kp SEMICOLON &kp ENTER>;
+    };
+  };
+
+  behaviors {
+    bspc_imeoff_ht: bspc_imeoff_ht {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <250>;
+      bindings = <&kp INT_MUHENKAN>, <&kp BACKSPACE>;
+    };
+
+    space_imeon_ht: space_imeon_ht {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <250>;
+      bindings = <&kp INT_HENKAN>, <&kp SPACE>;
+    };
+
+    enter_semi_ht: enter_semi_ht {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <250>;
+      bindings = <&semi_enter>, <&kp ENTER>;
+    };
+  };
 
   keymap {
     compatible = "zmk,keymap";
@@ -26,15 +61,15 @@
 
         /* row 1 (12) : 6L | (thumb1) | 5R */
         &kp TAB      &kp Y       &kp I       &kp A       &kp O       &trans
-        &kp D       &kp T       &kp N       &kp S       &kp H        &kp ENTER
+        &kp D       &kp T       &kp N       &kp S       &kp H        &enter_semi_ht 0 0
 
         /* row 2 (12) : 6L | (thumb2) | 5R */
         &kp LEFT_SHIFT   &kp Q       &kp J       &kp K       &kp X       &kp F
         &kp B            &kp M       &kp W       &kp V       &kp Z       &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &kp BACKSPACE
-        &kp SPACE     &mo 1 &kp PSCRN
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &bspc_imeoff_ht 0 0
+        &space_imeon_ht 0 0     &mo 1 &kp PSCRN
       >;
     };
 
@@ -49,15 +84,15 @@
 
         /* row 1 (12) */
         &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
-        &kp MINUS &kp LBKT       &kp RBKT       &kp LS(N6)   &kp LS(N2)   &kp ENTER
+        &kp MINUS &kp LBKT       &kp RBKT       &kp LS(N6)   &kp LS(N2)   &enter_semi_ht 0 0
 
         /* row 2 (12) */
         &kp LEFT_SHIFT  &trans     &trans         &trans     &kp LS(SEMICOLON)      &kp BACKSLASH
         &kp DOT         &kp SLASH  &trans         &trans     &trans                 &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &kp BACKSPACE
-        &kp SPACE     &mo 1 &kp PSCRN
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &bspc_imeoff_ht 0 0
+        &space_imeon_ht 0 0     &mo 1 &kp PSCRN
       >;
     };
 
@@ -80,8 +115,8 @@
         &kp HOME        &kp END   &kp LEFT  &kp RIGHT  &trans       &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &kp BACKSPACE
-        &kp SPACE     &mo 1 &kp PSCRN
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &bspc_imeoff_ht 0 0
+        &space_imeon_ht 0 0     &mo 1 &kp PSCRN
       >;
     };
 
