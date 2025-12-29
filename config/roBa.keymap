@@ -101,7 +101,7 @@
                 &space_imeon_ht     &mo 1     &kp DEL
             >;
 
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
+            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
         };
 
         /* LAYER 1: Symbols / Numbers */
@@ -124,7 +124,7 @@
                 &space_imeon_ht &mo 1 &kp DEL
             >;
 
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
+            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
         /* LAYER 2: Fn / Shortcuts */
@@ -147,7 +147,7 @@
                 &space_imeon_ht &mo 1 &kp DEL
             >;
 
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
+            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
         /* LAYER 3: Mouse clicks (requested: put clicks at A/O positions) */
@@ -170,7 +170,7 @@
                 &space_imeon_ht &mo 1 &kp DEL
             >;
 
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
+            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
         /* LAYER 4: automouse (movement) */
