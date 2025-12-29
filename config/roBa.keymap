@@ -22,11 +22,6 @@
     automouse-layer = <4>;
     scroll-layers = <5>;
 
-    scroll {
-        layers = <5>;
-        max-speed = <SCROLL_MAX_SPEED>;
-        timeout-ms = <SCROLL_TIMEOUT_MS>;
-    };
 };
 
  / {
@@ -67,7 +62,7 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
 
-            bindings = <&kp INT_HENKAN>, <&kp SPACE>;
+            bindings = <&kp INT_HENKAN &kp SPACE>;
         };
 
         /* Enter tap / ';'+Enter hold */
@@ -79,7 +74,7 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
 
-            bindings = <&semicolon_enter>, <&kp ENTER>;
+            bindings = <&semicolon_enter &kp ENTER>;
         };
     };
 
@@ -91,7 +86,7 @@
             bindings = <
                 /* Row 0 (10): 5L + 5R */
                 &kp ESC   &kp P     &kp E     &kp U     &kp G
-                &kp C     &kp R     &kp L     &kp MINUS &kp DEL
+                &kp C     &kp R     &kp L     &kp MINUS &kp PSCRN
 
                 /* Row 1 (12): 6L + 6R */
                 &kp TAB   &kp Y     &kp I     &kp A     &kp O     XXX
@@ -103,10 +98,10 @@
 
                 /* Row 3 (9): thumbs */
                 &kp LCTRL &kp LALT  &kp LGUI  &mo 3     &mo 2     &bspc_imeoff_ht
-                &space_imeon_ht     &mo 1     &kp PSCRN
+                &space_imeon_ht     &mo 1     &kp DEL
             >;
 
-            sensor-bindings = <&inc_dec_kp DOWN UP>;
+            sensor-bindings = <&inc_dec_kp &kp DOWN &kp UP>;
         };
 
         /* LAYER 1: Symbols / Numbers */
