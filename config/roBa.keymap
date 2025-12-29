@@ -1,9 +1,10 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
 
 /*
- * roBa の matrix-transform は 4行（10 / 12 / 12 / 9 = 合計43）です。
- * 各レイヤーの bindings も必ず 43 個に揃えます。
+ * roBa (see roBa.dtsi) uses a 4-row matrix-transform.
+ * Each layer must provide 43 bindings total: 10 / 12 / 12 / 9.
  */
 
 #define XXX &none
@@ -22,40 +23,34 @@
   };
 
   behaviors {
-    /*
-     * Hold-Tap は #binding-cells = <2>（パラメータ2つ）固定です。
-     * 1つ目=hold側に渡す値、2つ目=tap側に渡す値。
-     */
-
-    /* tap: Backspace / hold: 無変換（IME OFF寄せ） */
+    /* tap: Backspace / hold: 無変換 (IME OFF寄せ) */
     bspc_imeoff_ht: bspc_imeoff_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "BSPC_IMEOFF_HT";
-      #binding-cells = <2>;
+      #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp>, <&kp>;
+      bindings = <&kp BACKSPACE &kp INT_MUHENKAN>;
     };
 
-    /* tap: Space / hold: 変換（IME ON寄せ） */
+    /* tap: Space / hold: 変換 (IME ON寄せ) */
     space_imeon_ht: space_imeon_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "SPACE_IMEON_HT";
-      #binding-cells = <2>;
+      #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp>, <&kp>;
+      bindings = <&kp SPACE &kp INT_HENKAN>;
     };
 
-    /* tap: Enter / hold: Enter→;（マクロ） */
+    /* tap: Enter / hold: Enter→; */
     enter_semi_ht: enter_semi_ht {
       compatible = "zmk,behavior-hold-tap";
       label = "ENTER_SEMI_HT";
-      #binding-cells = <2>;
+      #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      /* hold=macro（パラメータ不要） / tap=&kp */
-      bindings = <&enter_then_semi>, <&kp>;
+      bindings = <&kp ENTER &enter_then_semi>;
     };
   };
 
@@ -64,27 +59,25 @@
 
     /* =========================
      * LAYER 0: base
+     * 10 / 12 / 12 / 9 = 43 keys
      * ========================= */
     default_layer {
       bindings = <
         /* row 0 (10) : 5L | 5R */
         &kp ESCAPE   &kp P       &kp E       &kp U       &kp G
-        &kp C        &kp R       &kp L       &kp MINUS   &kp DELETE
+        &kp C        &kp R       &kp L       &kp MINUS   &kp DEL
 
-        /* row 1 (12) : 6L | 6R */
-        &kp TAB      &kp Y       &kp I       &kp A       &kp O       XXX
+        /* row 1 (12) : 6L | (thumb1) | 5R */
+        &kp TAB      &kp Y       &kp I       &kp A       &kp O       &trans
         &mo 3        &kp D       &kp T       &kp N       &kp S       &kp H
 
-        /* row 2 (12) : 6L | 6R */
-        &kp LEFT_SHIFT  &kp Q    &kp J       &kp K       &kp X       &kp F
-        &mo 2           &kp B    &kp M       &kp W       &kp V       &kp Z
+        /* row 2 (12) : 6L | (thumb2) | 5R */
+        &kp LEFT_SHIFT   &kp Q       &kp J       &kp K       &kp X       &kp F
+        &mo 2            &kp B       &kp M       &kp W       &kp V       &kp Z
 
-        /* row 3 (9) : 6L | 3R(thumb) */
-        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  XXX  XXX  XXX
-        /* 1=hold, 2=tap */
-        &bspc_imeoff_ht INT_MUHENKAN BACKSPACE
-        &space_imeon_ht INT_HENKAN SPACE
-        &enter_semi_ht 0 ENTER
+        /* row 3 (9) */
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &trans   &trans   &trans
+        &bspc_imeoff_ht     &space_imeon_ht &enter_semi_ht
       >;
     };
 
@@ -98,23 +91,21 @@
         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0
 
         /* row 1 (12) */
-        &kp TAB   XXX           &kp SEMICOLON  &kp COMMA   &kp DOT     XXX
-        &mo 3     &kp LBKT      &kp RBKT       &kp MINUS   &kp EQUAL   &kp BACKSLASH
+        &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT    &trans
+        &mo 3     &kp LBKT       &kp RBKT       &kp MINUS   &kp EQUAL  &kp BACKSLASH
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  XXX     XXX     XXX     XXX     XXX
-        &mo 2           &kp GRAVE  &kp SQT  &kp SLASH  &kp EXCL  &kp QUESTION
+        &kp LEFT_SHIFT  &trans   &trans         &trans       &trans       &trans
+        &mo 2           &kp GRAVE &kp SQT       &kp SLASH    &kp QUESTION &kp EXCLAMATION
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  XXX  XXX  XXX
-        &bspc_imeoff_ht INT_MUHENKAN BACKSPACE
-        &space_imeon_ht INT_HENKAN SPACE
-        &enter_semi_ht 0 ENTER
+        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_WIN  &trans  &trans  &trans
+        &bspc_imeoff_ht   &space_imeon_ht  &enter_semi_ht
       >;
     };
 
     /* =========================
-     * LAYER 2: fn（myboard.keymapのショートカットを復元）
+     * LAYER 2: fn
      * ========================= */
     fn_layer {
       bindings = <
@@ -123,43 +114,39 @@
         &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
 
         /* row 1 (12) */
-        &kp TAB  &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   XXX
-        &mo 3    &kp F11     &kp F12     XXX         XXX         XXX
+        &kp TAB  &trans   &trans   &trans   &trans   &trans
+        &mo 3    &trans   &trans   &trans   &trans   &trans
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  &kp LC(A)  &kp LC(S)  &kp LC(D)  &kp LC(F)  &kp LC(G)
-        &mo 2           XXX        XXX        &kp HOME   &kp END    &kp DELETE
+        &kp LEFT_SHIFT  &trans   &trans   &trans   &trans   &trans
+        &mo 2           &trans   &trans   &trans   &trans   &trans
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  XXX  XXX  XXX
-        &bspc_imeoff_ht INT_MUHENKAN BACKSPACE
-        &space_imeon_ht INT_HENKAN SPACE
-        &enter_semi_ht 0 ENTER
+        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_WIN  &trans  &trans  &trans
+        &bspc_imeoff_ht   &space_imeon_ht  &enter_semi_ht
       >;
     };
 
     /* =========================
-     * LAYER 3: mouse（A=左クリック / O=右クリック）
+     * LAYER 3: mouse / navigation
      * ========================= */
-    layer_3 {
+    mouse_layer {
       bindings = <
         /* row 0 (10) */
-        XXX  XXX  XXX  XXX  XXX
-        XXX  XXX  XXX  XXX  XXX
+        &trans &trans &trans &trans &trans
+        &trans &trans &trans &trans &trans
 
         /* row 1 (12) */
-        XXX  XXX  XXX  &mkp LCLK  &mkp RCLK  XXX
-        XXX  XXX  XXX  XXX        XXX        XXX
+        &trans &trans &trans &trans &trans &trans
+        &trans &trans &trans &trans &trans &trans
 
         /* row 2 (12) */
-        XXX  XXX  XXX  XXX  XXX  XXX
-        XXX  XXX  XXX  XXX  XXX  XXX
+        &trans &trans &trans &trans &trans &trans
+        &trans &trans &trans &trans &trans &trans
 
         /* row 3 (9) */
-        XXX  XXX  XXX  XXX  XXX  XXX
-        &bspc_imeoff_ht INT_MUHENKAN BACKSPACE
-        &space_imeon_ht INT_HENKAN SPACE
-        &enter_semi_ht 0 ENTER
+        &trans &trans &trans &trans &trans &trans
+        &mkp MB1  &mkp MB2  &mkp MB3
       >;
     };
   };
