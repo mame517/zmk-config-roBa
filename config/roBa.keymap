@@ -16,30 +16,31 @@
   };
 
   behaviors {
-    bspc_imeoff_ht: bspc_imeoff_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      bindings = <&kp>, <&kp>;
-    };
-
-    space_imeon_ht: space_imeon_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      bindings = <&kp>, <&kp>;
-    };
-
-    enter_semi_ht: enter_semi_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      bindings = <&semi_enter>, <&kp>;
-    };
+  bspc_imeoff_ht: bspc_imeoff_ht {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    bindings = <&kp BACKSPACE>, <&kp INT_MUHENKAN>;
   };
+
+  space_imeon_ht: space_imeon_ht {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    bindings = <&kp SPACE>, <&kp INT_HENKAN>;
+  };
+
+  enter_semi_ht: enter_semi_ht {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    bindings = <&kp ENTER>, <&semi_enter>;
+  };
+};
+
 
 
   keymap {
@@ -80,7 +81,7 @@
         &enter_semi_ht 0 ENTER
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp CORON  &kp BACKSLASH
+        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp COLON  &kp BACKSLASH
         &kp DOT         &kp SLASH  &trans         &trans     &trans             &kp RIGHT_SHIFT
 
         /* row 3 (9) */
