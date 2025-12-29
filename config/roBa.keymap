@@ -55,7 +55,7 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
 
-            bindings = <&kp INT_MUHENKAN>, <&kp BSPC>;
+            bindings = <&kp INT_MUHENKAN &kp BSPC>;
         };
 
         /* Space tap / IME ON (Henkan) hold */
@@ -106,7 +106,7 @@
                 &space_imeon_ht     &mo 1     &kp PSCRN
             >;
 
-            sensor-bindings = <&inc_dec_kp &kp DOWN &kp UP>;
+            sensor-bindings = <&inc_dec_kp DOWN UP>;
         };
 
         /* LAYER 1: Symbols / Numbers */
