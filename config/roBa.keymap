@@ -6,7 +6,7 @@
  * ここも 4行ぶん（10 / 12 / 12 / 9 = 合計43）で bindings を書きます。
  */
 
-#define XXX &none
+#define &trans &none
 
 / {
   macros {
@@ -67,7 +67,7 @@
         &kp C        &kp R       &kp L       &kp MINUS   &kp DEL
 
         /* row 1 (12) : 6L | (thumb1) | 5R */
-        &kp TAB      &kp Y       &kp I       &kp A       &kp O       XXX
+        &kp TAB      &kp Y       &kp I       &kp A       &kp O       &trans
         &mo 3        &kp D       &kp T       &kp N       &kp S       &kp H
 
         /* row 2 (12) : 6L | (thumb2) | 5R */
@@ -75,7 +75,7 @@
         &mo 2        &kp B       &kp M       &kp W       &kp V       &kp Z
 
         /* row 3 (9) : 6L | (thumb3)(thumb4) | 1R */
-        &kp LCTRL    &kp LALT    &kp LGUI    XXX         XXX         XXX
+        &kp LCTRL    &kp LALT    &kp LGUI    &trans         &trans         &trans
         &bspc_imeoff_ht  &space_imeon_ht    &enter_semi_ht
       >;
     };
@@ -90,15 +90,15 @@
         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0
 
         /* row 1 (12) */
-        &kp TAB   XXX       &kp SEMICOLON  &kp COMMA   &kp DOT    XXX
+        &kp TAB   &trans       &kp SEMICOLON  &kp COMMA   &kp DOT    &trans
         &mo 3     &kp LBKT  &kp RBKT       &kp MINUS   &kp EQUAL  &kp BACKSLASH
 
         /* row 2 (12) */
-        &kp LSHIFT  XXX     XXX       XXX       XXX       XXX
+        &kp LSHIFT  &trans     &trans       &trans       &trans       &trans
         &mo 2       &kp GRAVE  &kp SQT  &kp SLASH  &kp QUESTION  &kp EXCLAMATION
 
         /* row 3 (9) */
-        &kp LCTRL   &kp LALT  &kp LGUI  XXX  XXX  XXX
+        &kp LCTRL   &kp LALT  &kp LGUI  &trans  &trans  &trans
         &bspc_imeoff_ht  &space_imeon_ht  &enter_semi_ht
       >;
     };
@@ -113,15 +113,15 @@
         &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
 
         /* row 1 (12) */
-        &kp TAB  XXX      XXX      XXX      XXX      XXX
-        &mo 3    XXX      XXX      XXX      XXX      XXX
+        &kp TAB  &trans      &trans      &trans      &trans      &trans
+        &mo 3    &trans      &trans      &trans      &trans      &trans
 
         /* row 2 (12) */
-        &kp LSHIFT  XXX   XXX   XXX   XXX   XXX
-        &mo 2       XXX   XXX   XXX   XXX   XXX
+        &kp LSHIFT  &trans   &trans   &trans   &trans   &trans
+        &mo 2       &trans   &trans   &trans   &trans   &trans
 
         /* row 3 (9) */
-        &kp LCTRL  &kp LALT  &kp LGUI  XXX  XXX  XXX
+        &kp LCTRL  &kp LALT  &kp LGUI  &trans  &trans  &trans
         &bspc_imeoff_ht  &space_imeon_ht  &enter_semi_ht
       >;
     };
