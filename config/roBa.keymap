@@ -58,36 +58,7 @@
     };
   };
 
-  behaviors {
-    bspc_imeoff_ht: bspc_imeoff_ht {
-      compatible = "zmk,behavior-hold-tap";
-      label = "BSPC_IMEOFF_HT";
-      #binding-cells = <0>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      /* 修正：phandleだけにする */
-      bindings = < &m_bspc &m_muhenkan >;
-    };
 
-    space_imeon_ht: space_imeon_ht {
-      compatible = "zmk,behavior-hold-tap";
-      label = "SPACE_IMEON_HT";
-      #binding-cells = <0>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      bindings = < &m_space &m_henkan >;
-    };
-
-    enter_semi_ht: enter_semi_ht {
-      compatible = "zmk,behavior-hold-tap";
-      label = "ENTER_SEMI_HT";
-      #binding-cells = <0>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      /* tap=Enter, hold=Enter→;（既存マクロをそのまま使う） */
-      bindings = < &m_enter &enter_then_semi >;
-    };
-  };
 
   keymap {
     compatible = "zmk,keymap";
@@ -104,15 +75,15 @@
 
         /* row 1 (12) : 6L | (thumb1) | 5R */
         &kp TAB      &kp Y       &kp I       &kp A       &kp O       &trans
-        &mo 3        &kp D       &kp T       &kp N       &kp S       &kp H
+        &kp D       &kp T       &kp N       &kp S       &kp H        &kp ENTER
 
         /* row 2 (12) : 6L | (thumb2) | 5R */
         &kp LEFT_SHIFT   &kp Q       &kp J       &kp K       &kp X       &kp F
-        &mo 2            &kp B       &kp M       &kp W       &kp V       &kp Z
+        &kp B            &kp M       &kp W       &kp V       &kp Z       &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &trans   &trans   &trans
-        &bspc_imeoff_ht     &space_imeon_ht &enter_semi_ht
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &kp BACKSPACE
+        &kp SPACE     &mo 1 &kp PSCRN
       >;
     };
 
@@ -126,16 +97,16 @@
         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0
 
         /* row 1 (12) */
-        &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT    &trans
-        &mo 3     &kp LBKT       &kp RBKT       &kp MINUS   &kp EQUAL  &kp BACKSLASH
+        &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
+        &kp MINUS &kp LBKT       &kp RBKT       &kp CARET   &kp AT_SIGN   &kp ENTER
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  &trans   &trans         &trans       &trans       &trans
-        &mo 2           &kp GRAVE &kp SQT       &kp SLASH    &kp QUESTION &kp EXCLAMATION
+        &kp LEFT_SHIFT  &trans   &trans         &trans       &CORON       &BACKSLASH
+        &kp DOTE &kp SLASH       &trans         &trans       &trans       &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_WIN  &trans  &trans  &trans
-        &bspc_imeoff_ht   &space_imeon_ht  &enter_semi_ht
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &kp BACKSPACE
+        &kp SPACE     &mo 1 &kp PSCRN
       >;
     };
 
@@ -150,15 +121,15 @@
 
         /* row 1 (12) */
         &kp TAB  &trans   &trans   &trans   &trans   &trans
-        &mo 3    &trans   &trans   &trans   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans   &kp ENTER
 
         /* row 2 (12) */
         &kp LEFT_SHIFT  &trans   &trans   &trans   &trans   &trans
-        &mo 2           &trans   &trans   &trans   &trans   &trans
+        &trans           &trans   &trans   &trans   &trans   &kp RIGHT_SHIFT
 
         /* row 3 (9) */
-        &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_WIN  &trans  &trans  &trans
-        &bspc_imeoff_ht   &space_imeon_ht  &enter_semi_ht
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &kp BACKSPACE
+        &kp SPACE     &mo 1 &kp PSCRN
       >;
     };
 
@@ -173,15 +144,15 @@
 
         /* row 1 (12) : A=MB1, O=MB2 */
         &trans  &trans  &trans  &mkp MB1  &mkp MB2  &trans
-        &trans  &trans  &trans  &trans    &trans    &trans
+        &trans  &trans  &trans  &trans    &trans    &kp ENTER
 
         /* row 2 (12) */
-        &trans &trans &trans &trans &trans &trans
-        &trans &trans &trans &trans &trans &trans
+        &kp LEFT_SHIFT &trans &trans &trans &trans &trans
+        &trans &trans &trans &trans &trans &kp RIGHT_SHIFT
 
-        /* row 3 (9) : 余り（必要ならここにMB3等） */
-        &trans &trans &trans &trans &trans &trans
-        &trans &trans &trans
+        /* row 3 (9) */
+        &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1   &kp BACKSPACE
+        &kp SPACE     &mo 1 &kp PSCRN
       >;
     };
   };
