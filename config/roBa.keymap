@@ -171,17 +171,17 @@
         &trans &trans &trans &trans &trans
         &trans &trans &trans &trans &trans
 
-        /* row 1 (12) */
-        &trans &trans &trans &trans &trans &trans
-        &trans &trans &trans &trans &trans &trans
+        /* row 1 (12) : A=MB1, O=MB2 */
+        &trans  &trans  &trans  &mkp MB1  &mkp MB2  &trans
+        &trans  &trans  &trans  &trans    &trans    &trans
 
         /* row 2 (12) */
         &trans &trans &trans &trans &trans &trans
         &trans &trans &trans &trans &trans &trans
 
-        /* row 3 (9) */
+        /* row 3 (9) : 余り（必要ならここにMB3等） */
         &trans &trans &trans &trans &trans &trans
-        &mkp MB1  &mkp MB2  &mkp MB3
+        &trans &trans &trans
       >;
     };
   };
