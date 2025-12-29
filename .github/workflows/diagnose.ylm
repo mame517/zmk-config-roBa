@@ -1,0 +1,35 @@
+name: Diagnose keymap
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show keymap hash/content
+        run: |
+          set -euxo pipefail
+
+          echo "===== repo info ====="
+          git rev-parse HEAD
+          git status --porcelain || true
+
+          echo "===== find keymap files ====="
+          find . -maxdepth 6 -type f \( -name "*.keymap" -o -name "build.yaml" -o -name "build.yml" \) -print
+
+          echo "===== sha256 (expected path: ./config/roBa.keymap) ====="
+          sha256sum ./config/roBa.keymap
+
+          echo "===== grep: hold-tap nodes ====="
+          grep -n "bspc_imeoff_ht" ./config/roBa.keymap || true
+
+          echo "===== grep: required bindings line ====="
+          grep -n "bindings = <&bspc_kp &ime_off_kp>" ./config/roBa.keymap || true
+
+          echo "===== show behaviors block around hold-tap ====="
+          # hold-tapの定義付近が見える範囲を出す（行番号は変わってもOK）
+          nl -ba ./config/roBa.keymap | sed -n '1,220p'
