@@ -50,8 +50,10 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
 
-            bindings = <&kp INT_MUHENKAN &kp BSPC>;
+            /* tap = BSPC / hold = IME OFF */
+            bindings = <&kp BSPC &kp INT_MUHENKAN>;
         };
+
 
         /* Space tap / IME ON (Henkan) hold */
         space_imeon_ht: space_imeon_ht {
@@ -62,7 +64,7 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
 
-            bindings = <&kp INT_HENKAN &kp SPACE>;
+            bindings = <&kp SPACE &kp INT_HENKAN>;
         };
 
         /* Enter tap / ';'+Enter hold */
