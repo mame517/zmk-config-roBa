@@ -18,7 +18,7 @@
   behaviors {
     bspc_imeoff_ht: bspc_imeoff_ht {
     compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <0>;
+    #binding-cells = <2>;
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     /* hold: 英数 / tap: BSPC */
@@ -27,7 +27,7 @@
 
   space_imeon_ht: space_imeon_ht {
     compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <0>;
+    #binding-cells = <2>;
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     /* hold: 日本語入力ON / tap: SPACE */
@@ -39,7 +39,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&semi_enter>, <&kp>;
+      bindings = <&semi_enter &kp ENTER>;
     };
   };
 
