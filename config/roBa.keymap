@@ -22,7 +22,7 @@
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     /* hold: 英数 / tap: BSPC */
-    bindings = <&kp LANG2 &kp BACKSPACE>;
+    bindings = <&kp LANG2>, <&kp BACKSPACE>;
   };
 
   space_imeon_ht: space_imeon_ht {
@@ -31,7 +31,7 @@
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     /* hold: 日本語入力ON / tap: SPACE */
-    bindings = <&kp LANG1 &kp SPACE>;
+    bindings = <&kp LANG1>, <&kp SPACE>;
   };
 
     enter_semi_ht: enter_semi_ht {
@@ -39,7 +39,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&semi_enter &kp ENTER>;
+      bindings = <&semi_enter>, <&kp ENTER>;
     };
   };
 
