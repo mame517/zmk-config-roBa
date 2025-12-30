@@ -5,7 +5,7 @@
 #define XXX &trans
 
 / {
-    macros {
+      macros {
     semi_enter: semi_enter {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
@@ -13,62 +13,32 @@
       wait-ms = <5>;
       bindings = <&kp SEMICOLON &kp ENTER>;
     };
-    /* wrapper macros for single key behaviors so other behaviors can reference them by phandle */
-    kp_lang2: kp_lang2 {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&kp LANG2>;
-    };
-
-    kp_backspace: kp_backspace {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&kp BACKSPACE>;
-    };
-
-    kp_lang1: kp_lang1 {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&kp LANG1>;
-    };
-
-    kp_space: kp_space {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&kp SPACE>;
-    };
-    kp_enter: kp_enter {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&kp ENTER>;
-    };
   };
 
   behaviors {
     bspc_imeoff_ht: bspc_imeoff_ht {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <200>;
-    /* hold: 英数 / tap: BSPC */
-    bindings = <&kp_lang2>, <&kp_backspace>;
-  };
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&kp &kp>;
+    };
 
-  space_imeon_ht: space_imeon_ht {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <200>;
-    /* hold: 日本語入力ON / tap: SPACE */
-    bindings = <&kp_lang1>, <&kp_space>;
-  };
+    space_imeon_ht: space_imeon_ht {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <200>;
+      bindings = <&kp &kp>;
+    };
 
     enter_semi_ht: enter_semi_ht {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&semi_enter>, <&kp_enter>;
+      /* hold = macro (引数なし), tap = &kp (引数あり) */
+      bindings = <&semi_enter &kp>;
     };
   };
 
@@ -93,10 +63,11 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht
-        &space_imeon_ht
+        &bspc_imeoff_ht LANG2 BACKSPACE
+        &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
+      sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
     };
 
     symbol_layer {
@@ -116,10 +87,11 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht
-        &space_imeon_ht
+        &bspc_imeoff_ht LANG2 BACKSPACE
+        &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
+      sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
     };
 
     fn_layer {
@@ -139,10 +111,11 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht
-        &space_imeon_ht
+        &bspc_imeoff_ht LANG2 BACKSPACE
+        &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
+      sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
     };
 
     mouse_layer {
@@ -162,10 +135,11 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht
-        &space_imeon_ht
+        &bspc_imeoff_ht LANG2 BACKSPACE
+        &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
+      sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
     };
   };
 };
