@@ -42,10 +42,6 @@
     };
   };
 
-  &mouse_scroll {
-    #sensor-binding-cells = <2>;
-  };
-
   keymap {
     compatible = "zmk,keymap";
 
@@ -146,3 +142,7 @@
     };
   };
 };
+
+&mouse_scroll {
+    #sensor-binding-cells = <2>;
+  };
