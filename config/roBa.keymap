@@ -21,7 +21,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp &kp>;
+      bindings = <&kp>, <&kp>;
     };
 
     space_imeon_ht: space_imeon_ht {
@@ -29,15 +29,15 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp &kp>;
+      bindings = <&kp>, <&kp>;
     };
 
     enter_semi_ht: enter_semi_ht {
       compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
+      #binding-cells = <1>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp &semi_enter>;
+      bindings = <&kp>, <&semi_enter>;
     };
   };
 
@@ -53,7 +53,7 @@
         /* row 1 (12) */
         &kp TAB      &kp Y       &kp I       &kp A       &kp O       &trans
         &kp D        &kp T       &kp N       &kp S       &kp H
-        &enter_semi_ht  &kp ENTER   &semi_enter
+        &enter_semi_ht ENTER
 
         /* row 2 (12) */
         &kp LEFT_SHIFT   &kp Q       &kp J       &kp K       &kp X       &kp F
@@ -61,8 +61,8 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 2   &mo 1
-        &bspc_imeoff_ht     &kp BACKSPACE   &kp INT_MUHENKAN
-        &space_imeon_ht     &kp SPACE       &kp INT_HENKAN
+        &bspc_imeoff_ht BACKSPACE EISU
+        &space_imeon_ht SPACE     KANA
         &mo 1 &kp PSCRN
       >;
     };
@@ -76,7 +76,7 @@
         /* row 1 (12) */
         &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
         &kp MINUS &kp LBKT       &kp BACKSLASH  &kp LS(N6)  &kp LS(N2)
-        &enter_semi_ht  &kp ENTER   &semi_enter
+        &enter_semi_ht ENTER
 
         /* row 2 (12) */
         &kp LEFT_SHIFT  &trans     &trans         &trans     &kp LS(SEMICOLON)  &kp BACKSLASH
@@ -84,8 +84,8 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht     &kp BACKSPACE   &kp INT_MUHENKAN
-        &space_imeon_ht     &kp SPACE       &kp INT_HENKAN
+        &bspc_imeoff_ht BACKSPACE EISU
+        &space_imeon_ht SPACE     KANA
         &mo 1 &kp PSCRN
       >;
     };
@@ -99,7 +99,7 @@
         /* row 1 (12) */
         &kp TAB   &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &trans
         &kp F11   &kp F12     &kp F13     &kp LC(F)   &kp LC(H)
-        &enter_semi_ht  &kp ENTER   &semi_enter
+        &enter_semi_ht ENTER
 
         /* row 2 (12) */
         &kp LEFT_SHIFT  &kp LC(A) &kp LC(S) &kp LC(D)  &kp LC(W)    &trans
@@ -107,8 +107,8 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht     &kp BACKSPACE   &kp INT_MUHENKAN
-        &space_imeon_ht     &kp SPACE       &kp INT_HENKAN
+        &bspc_imeoff_ht BACKSPACE EISU
+        &space_imeon_ht SPACE     KANA
         &mo 1 &kp PSCRN
       >;
     };
@@ -122,7 +122,7 @@
         /* row 1 (12) */
         &trans  &trans  &trans  &mkp MB1  &mkp MB2  &trans
         &trans  &trans  &trans  &trans    &trans
-        &enter_semi_ht  &kp ENTER   &semi_enter
+        &enter_semi_ht ENTER
 
         /* row 2 (12) */
         &kp LEFT_SHIFT &trans &trans &trans &trans &trans
@@ -130,8 +130,8 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht     &kp BACKSPACE   &kp INT_MUHENKAN
-        &space_imeon_ht     &kp SPACE       &kp INT_HENKAN
+        &bspc_imeoff_ht BACKSPACE EISU
+        &space_imeon_ht SPACE     KANA
         &mo 1 &kp PSCRN
       >;
     };
