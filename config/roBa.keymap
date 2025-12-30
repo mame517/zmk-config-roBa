@@ -77,12 +77,12 @@
 
         /* row 1 (12) */
         &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
-        &kp MINUS &kp RBKT       &kp BACKSLASH  &kp GRAVE   &kp LBKT
+        &kp MINUS &kp RBKT       &kp BACKSLASH  &kp EQUAL   &kp LBKT
         &enter_semi_ht 0 ENTER
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp SEMICOLON      &kp BACKSLASH
-        &kp DOT         &kp SLASH  &trans         &trans     &trans             &kp RIGHT_SHIFT
+        &kp LEFT_SHIFT  &trans     &trans         &kp F13    &kp SQT     &kp F14
+        &kp DOT         &kp SLASH  &trans         &trans     &trans      &kp RIGHT_SHIFT
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
