@@ -15,13 +15,14 @@
     };
   };
 
-  behaviors {
+    behaviors {
     bspc_imeoff_ht: bspc_imeoff_ht {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp BACKSPACE &kp EISU>;
+      /* tap: BACKSPACE / hold: EISU(=LANG2) */
+      bindings = <&kp BACKSPACE &kp LANG2>;
     };
 
     space_imeon_ht: space_imeon_ht {
@@ -29,7 +30,8 @@
       #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp SPACE &kp KANA>;
+      /* tap: SPACE / hold: KANA(=LANG1) */
+      bindings = <&kp SPACE &kp LANG1>;
     };
 
     enter_semi_ht: enter_semi_ht {
@@ -37,9 +39,11 @@
       #binding-cells = <0>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
+      /* tap: ENTER / hold: ; then ENTER */
       bindings = <&kp ENTER &semi_enter>;
     };
   };
+
 
 
 
