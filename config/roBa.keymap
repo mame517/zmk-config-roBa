@@ -78,7 +78,7 @@
 
         /* row 1 (12) */
         &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
-        &kp MINUS &kp RBKT       &kp BACKSLASH  &kp CARET   &kp AT_SIGN
+        &kp MINUS &kp RBKT       &kp BACKSLASH  &kp GRAVE   &kp LBKT
         &enter_semi_ht 0 ENTER
 
         /* row 2 (12) */
