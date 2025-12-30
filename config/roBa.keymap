@@ -67,7 +67,7 @@
         &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+      sensor-bindings = <&msc 0 20 &msc 0 -20>;
     };
 
     symbol_layer {
@@ -78,16 +78,16 @@
 
         /* row 1 (12) */
         &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
-        &kp MINUS &kp LBKT       &kp RBKT       &kp LS(N6)  &kp LS(N2)
+        &kp MINUS &kp RBKT       &kp BACKSLASH  &kp CARET   &kp AT_SIGN
         &enter_semi_ht 0 ENTER
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp LS(SEMICOLON)  &kp BACKSLASH
+        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp COLON          &kp NON_US_BSLH
         &kp DOT         &kp SLASH  &trans         &trans     &trans             &kp RIGHT_SHIFT
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht LANG2 BACKSPACE
+        &kp BACKSPACE
         &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
@@ -112,10 +112,10 @@
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
         &bspc_imeoff_ht LANG2 BACKSPACE
-        &space_imeon_ht LANG1 SPACE
+        &kp SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+      sensor-bindings = <&msc 0 20 &msc 0 -20>;
     };
 
     mouse_layer {
@@ -139,7 +139,7 @@
         &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+      sensor-bindings = <&msc 0 20 &msc 0 -20>;
     };
   };
 };
