@@ -142,7 +142,3 @@
     };
   };
 };
-
-&{/behaviors/mouse_scroll} {
-  #sensor-binding-cells = <2>;
-};
