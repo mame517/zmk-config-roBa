@@ -21,7 +21,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp>, <&kp>;
+      bindings = <&kp &kp>;
     };
 
     space_imeon_ht: space_imeon_ht {
@@ -29,7 +29,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp>, <&kp>;
+      bindings = <&kp &kp>;
     };
 
     enter_semi_ht: enter_semi_ht {
@@ -37,7 +37,7 @@
       #binding-cells = <1>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&kp>, <&semi_enter>;
+      bindings = <&kp &semi_enter>;
     };
   };
 
