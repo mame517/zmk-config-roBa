@@ -5,7 +5,7 @@
 #define XXX &trans
 
 / {
-      macros {
+  macros {
     semi_enter: semi_enter {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
@@ -67,7 +67,7 @@
         &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&msc 0 20 &msc 0 -20>;
+      sensor-bindings = <&msc 0 20 &msc 0 (-20)>;
     };
 
     symbol_layer {
@@ -115,7 +115,7 @@
         &kp SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&msc 0 20 &msc 0 -20>;
+      sensor-bindings = <&msc 0 20 &msc 0 (-20)>;
     };
 
     mouse_layer {
@@ -139,7 +139,7 @@
         &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&msc 0 20 &msc 0 -20>;
+      sensor-bindings = <&msc 0 20 &msc 0 (-20)>;
     };
   };
 };
