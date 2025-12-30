@@ -13,6 +13,30 @@
       wait-ms = <5>;
       bindings = <&kp SEMICOLON &kp ENTER>;
     };
+    /* wrapper macros for single key behaviors so other behaviors can reference them by phandle */
+    kp_lang2: kp_lang2 {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LANG2>;
+    };
+
+    kp_backspace: kp_backspace {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp BACKSPACE>;
+    };
+
+    kp_lang1: kp_lang1 {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp LANG1>;
+    };
+
+    kp_space: kp_space {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp SPACE>;
+    };
   };
 
   behaviors {
