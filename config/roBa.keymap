@@ -78,11 +78,11 @@
 
         /* row 1 (12) */
         &kp TAB   &trans         &kp SEMICOLON  &kp COMMA   &kp DOT       &trans
-        &kp MINUS &kp RBKT       &kp BACKSLASH  &kp CARET   &kp AT_SIGN
+        &kp MINUS &kp RBKT       &kp BACKSLASH  &kp CARET   &kp AT
         &enter_semi_ht 0 ENTER
 
         /* row 2 (12) */
-        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp COLON          &kp NON_US_BSLH
+        &kp LEFT_SHIFT  &trans     &trans         &trans     &kp COLON          &kp NON_US_BSLASH
         &kp DOT         &kp SLASH  &trans         &trans     &trans             &kp RIGHT_SHIFT
 
         /* row 3 (9) */
