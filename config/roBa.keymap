@@ -17,20 +17,22 @@
 
   behaviors {
     bspc_imeoff_ht: bspc_imeoff_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      bindings = <&kp>, <&kp>;
-    };
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    /* hold: 英数 / tap: BSPC */
+    bindings = <&kp LANG2 &kp BACKSPACE>;
+  };
 
-    space_imeon_ht: space_imeon_ht {
-      compatible = "zmk,behavior-hold-tap";
-      #binding-cells = <2>;
-      flavor = "tap-preferred";
-      tapping-term-ms = <200>;
-      bindings = <&kp>, <&kp>;
-    };
+  space_imeon_ht: space_imeon_ht {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    /* hold: 日本語入力ON / tap: SPACE */
+    bindings = <&kp LANG1 &kp SPACE>;
+  };
 
     enter_semi_ht: enter_semi_ht {
       compatible = "zmk,behavior-hold-tap";
@@ -62,8 +64,8 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht BACKSPACE INT_MUHENKAN
-        &space_imeon_ht SPACE INT_HENKAN
+        &bspc_imeoff_ht
+        &space_imeon_ht
         &mo 1 &kp PSCRN
       >;
     };
@@ -85,8 +87,8 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht BACKSPACE INT_MUHENKAN
-        &space_imeon_ht SPACE INT_HENKAN
+        &bspc_imeoff_ht
+        &space_imeon_ht
         &mo 1 &kp PSCRN
       >;
     };
@@ -108,8 +110,8 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht BACKSPACE INT_MUHENKAN
-        &space_imeon_ht SPACE INT_HENKAN
+        &bspc_imeoff_ht
+        &space_imeon_ht
         &mo 1 &kp PSCRN
       >;
     };
@@ -131,8 +133,8 @@
 
         /* row 3 (9) */
         &kp LEFT_CONTROL    &kp LEFT_ALT    &kp LEFT_WIN    &mo 3   &mo 2
-        &bspc_imeoff_ht BACKSPACE INT_MUHENKAN
-        &space_imeon_ht SPACE INT_HENKAN
+        &bspc_imeoff_ht
+        &space_imeon_ht
         &mo 1 &kp PSCRN
       >;
     };
