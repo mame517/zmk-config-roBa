@@ -66,7 +66,7 @@
         &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&msc &msc>;
+      sensor-bindings = <&msc 0 20 &msc 0 -20>;
     };
 
     symbol_layer {
@@ -114,7 +114,7 @@
         &kp SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&msc &msc>;
+      sensor-bindings = <&msc 0 20 &msc 0 -20>;
     };
 
     mouse_layer {
@@ -138,11 +138,11 @@
         &space_imeon_ht LANG1 SPACE
         &mo 1 &kp PSCRN
       >;
-      sensor-bindings = <&msc &msc>;
+      sensor-bindings = <&msc 0 20 &msc 0 -20>;
     };
   };
 };
 
-&mouse_scroll {
-    #sensor-binding-cells = <2>;
-  };
+&msc {
+  #sensor-binding-cells = <2>;
+};
