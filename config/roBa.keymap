@@ -37,6 +37,11 @@
       #binding-cells = <0>;
       bindings = <&kp SPACE>;
     };
+    kp_enter: kp_enter {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&kp ENTER>;
+    };
   };
 
   behaviors {
@@ -46,7 +51,7 @@
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     /* hold: 英数 / tap: BSPC */
-    bindings = <&kp LANG2>, <&kp BACKSPACE>;
+    bindings = <&kp_lang2>, <&kp_backspace>;
   };
 
   space_imeon_ht: space_imeon_ht {
@@ -55,7 +60,7 @@
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     /* hold: 日本語入力ON / tap: SPACE */
-    bindings = <&kp LANG1>, <&kp SPACE>;
+    bindings = <&kp_lang1>, <&kp_space>;
   };
 
     enter_semi_ht: enter_semi_ht {
@@ -63,7 +68,7 @@
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <200>;
-      bindings = <&semi_enter>, <&kp ENTER>;
+      bindings = <&semi_enter>, <&kp_enter>;
     };
   };
 
