@@ -3,7 +3,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define XXX &trans
-#define ZMK_MOUSE_POINTING_SCRL_VAL 100
+#define ZMK_MOUSE_POINTING_SCRL_VAL 10
 
 / {
   macros {
@@ -46,7 +46,7 @@
       compatible = "zmk,behavior-sensor-rotate";
       #sensor-binding-cells = <0>;
       bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-      tap-ms = <20>;
+      tap-ms = <1>;
     };
   };
 
